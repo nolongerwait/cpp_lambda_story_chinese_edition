@@ -32,7 +32,7 @@
         - [重载](Source/Chapter2/README.md#重载)
         - [其他修饰符](Source/Chapter2/README.md#其他修饰符)
     - [捕获](Source/Chapter2/README.md#4.-捕获)
-        - [`mutable` 关键字](Source/Chapter2/README.md#-mutable-关键字)
+        - [`mutable` 关键字](Source/Chapter2/README.md#mutable-关键字)
         - [调用计数器 - 捕获变量的一个例子](Source/Chapter2/README.md#调用计数器---捕获变量的一个例子)
         - [捕获全局变量](Source/Chapter2/README.md#捕获全局变量)
         - [捕获静态变量](Source/Chapter2/README.md#捕获静态变量)
