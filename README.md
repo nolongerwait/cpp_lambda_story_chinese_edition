@@ -49,25 +49,25 @@
     - [Lambda 继承](Source/Chapter2/README.md#8.-Lambda-继承)
     - [在容器中存储 Lambda](Source/Chapter2/README.md#9.-在容器中存储-Lambda)
     - [总结](Source/Chapter2/README.md#10.-总结)
-- 三、Lambda in C++14
+- 三、[Lambda in C++14](Source/Chapter3/README.md)
     - 为Lambda增加默认参数
     - 返回类型
     - 带有初始化的捕获
-    - 限制
-    - 对现有问题的改进
+        - 限制
+        - 对现有问题的改进
     - 泛型Lambda
-    - 可变泛型参数
-    - 使用泛型 lambda 进行完美转发
-    - 减少一些隐蔽的类型纠正
+        - 可变泛型参数
+        - 使用泛型 lambda 进行完美转发
+        - 减少一些隐蔽的类型纠正
     - 使用Lambda代替std::bind1st和std::bind2nd
-    - 使用现代C++技术
-    - 函数组合
+        - 使用现代C++技术
+        - 函数组合
     - Lambda提升（LIFTing with Lambda）
     - 递归Lambda
-    - 利用std::function
-    - 内部Lambda和泛型参数
-    - 更多技巧
-    - 使用递归lambda是最好的选择吗？
+        - 利用std::function
+        - 内部Lambda和泛型参数
+        - 更多技巧
+        - 使用递归lambda是最好的选择吗？
     - 总结
 - 四、Lambda in C++17
     - Lambda 语法更新
