@@ -8,11 +8,11 @@
 ## 读者反馈
 如果您发现错误、拼写错误、语法错误……或其他任何需要更正的（特别是逻辑问题！），请将您的反馈发送到 bartlomiej.filipek@bfilipek.com。
 您也可以使用这个地方：
-- Leanpub Book的反馈页面 - C++ Lambda Story
-更重要的是，这本书在 GoodReads 上有一个专门的页面。 请在那里分享您的见解：
-- C++ Lambda Story @GoodReads
+- [Leanpub Book的反馈页面 - C++ Lambda Story](https://leanpub.com/cpplambda)  
+更重要的是，这本书在 *GoodReads* 上有一个专门的页面。 请在那里分享您的见解：
+- [C++ Lambda Story @GoodReads](https://www.goodreads.com/book/show/53609731-c-lambda-story)
 ## 代码证书
-这本书的代码在知识共享许可（Creative Commons License）下可用
+这本书的代码在 **知识共享许可（Creative Commons License）** 下可用
 ## 代码格式
 ## 语法高亮限制
 ## 在线编译器
@@ -21,33 +21,33 @@
 本书中大部分的代码都附有在线编译器的链接，当然，不同的代码使用的不同的编译器。
 
 这是本书中所使用过的全部在线编译器服务：
-- Coliru - 使用 GCC 9.2.0 版本（截止 2020 年 06 月），功能简洁但十分高效
-- Wandbox - 提供了大部分的编译器，包含了绝大多数的 Clang 和 GCC 版本，使用了 boost 的库，支持多文件编译。并且你可以生成链接来分享你的代码。
-- Compiler Explorer - 提供多种编译器，显示生成的汇编代码，可以执行代码，甚至进行静态代码分析。
-- CppBench - 可以运行简单的 C++ 性能测试（基于 Google Benchmark）。
-- C++ Insights - 基于Clang的源码转义工具，可以展示编译器视角下的代码，比如将源代码进行预编译展开。你可以在这查看Lambda表达式，auto关键字，结构化绑定，模板推断，可变参数包，范围式循环等的展开结果。
+- [Coliru](http://coliru.stacked-crooked.com/) - 使用 GCC 9.2.0 版本（截止 2020 年 06 月），功能简洁但十分高效
+- [Wandbox](https://wandbox.org/) - 提供了大部分的编译器，包含了绝大多数的 Clang 和 GCC 版本，使用了 boost 的库，支持多文件编译。并且你可以生成链接来分享你的代码。
+- [Compiler Explorer](https://gcc.godbolt.org/) - 提供多种编译器，显示生成的汇编代码，可以执行代码，甚至进行静态代码分析。
+- [CppBench](https://quick-bench.com/) - 可以运行简单的 C++ 性能测试（基于 Google Benchmark）。
+- [C++ Insights](https://cppinsights.io/) - 基于 Clang的 源码转义工具，可以展示编译器视角下的代码，比如将源代码进行预编译展开。你可以在这查看 Lambda 表达式，auto 关键字，结构化绑定，模板推断，可变参数包，范围式循环等的展开结果。
 
-当然，如果想尝试其他 C++ 的在线编译器，你也可以在这个网站查看：List of Online C++ Compilers by arnemertz
+当然，如果想尝试其他 C++ 的在线编译器，你也可以在这个网站查看：[List of Online C++ Compilers by arnemertz](https://arnemertz.github.io/online-compilers/)
 ## 关于作者
-Bartłomiej (Bartek) Filipekis，一个拥有超过12年专业经验的C++软件开发工程师。2010年在Cracow, Poland毕业自Jagiellonian University，拥有计算机科学的硕士学位。
+**Bartłomiej (Bartek) Filipekis**，一个拥有超过 12 年专业经验的 C++ 软件开发工程师。2010年在 Cracow, Poland 毕业自 Jagiellonian University ，拥有计算机科学的硕士学位。
 
-现就职于Xara，负责开发高级文档编辑器。同时，拥有桌面图形程序、游戏开发、大型航空系统、图形驱动甚至生物反馈方面的开发经验。早前，在Cracow当地的大学中教授编程（游戏编程和图形编程）课程。
+现就职于 Xara，负责开发高级文档编辑器。同时，拥有桌面图形程序、游戏开发、大型航空系统、图形驱动甚至生物反馈方面的开发经验。早前，在 Cracow 当地的大学中教授编程（游戏编程和图形编程）课程。
 
-从2011年起，Bartek开始在bfilipek.com上撰写博客。起初，博文主题围绕图形编程，但是现在更多聚焦于C++核心内容。同时，他也是Crocow C++开发者组织的联合组织者。你可以在@CppCast找到他关于C++17，博客和文本处理相关的内容。
+从2011年起，Bartek 开始在 [bfilipek.com](http://bfilipek.com) 上撰写博客。起初，博文主题围绕图形编程，但是现在更多聚焦于C++核心内容。同时，他也是 [Crocow C++](https://www.meetup.com/C-User-Group-Cracow/) 开发者组织的联合组织者。你可以在 [@CppCast](https://cppcast.com/bartlomiej-filipek/) 找到他关于 C++17 ，博客和文本处理相关的内容。
 
-从2018年十月起，Bartek开始在Polish National Body就任C++专家一职，这是一家直接与ISO/IEC JTC 1/SC 22 (C++ Standardisation Committee)工作的公司。同月，Bartek获得了Microsoft授予的2019/2020年度的MVP头衔荣誉。
+从2018年十月起， Bartek 开始在 Polish National Body 就任C++专家一职，这是一家直接与 ISO/IEC JTC 1/SC 22 (C++ Standardisation Committee) 工作的公司。同月， Bartek 获得了 Microsoft 授予的 2019/2020 年度的 MVP 头衔荣誉。
 
 在空闲时间，喜欢和他心爱的小儿子一起收集和拼装乐高模型。
 
-Bartek也是《C++ 17 In Detail》的作者。
+Bartek也是《[C++ 17 In Detail](https://leanpub.com/cpp17indetail)》的作者。
 ## 致谢
-如果没有 C++ 专家 Tomasz Kamiński 的宝贵意见，本书就不可能完成（参见 Tomek 在 Linkedin 上的简介）。
+如果没有 C++ 专家 Tomasz Kamiński 的宝贵意见，本书就不可能完成（参见 [Tomek 在 Linkedin 上的简介](https://www.linkedin.com/in/tomasz-kami%C5%84ski-208572b1/)）。
 
-Tomek 在我们位于克拉科夫的 localC++ 用户组中主持了关于 Lambda“历史”的现场编码演示：Lambdas: From C++11 to C++20。本书中使用的很多例子都来自那次会议。
+Tomek 在我们位于克拉科夫的 Local C++ 用户组中主持了关于 Lambda “历史”的现场编码演示：[Lambdas: From C++11 to C++20](https://www.meetup.com/pl-PL/C-User-Group-Cracow/events/258795519/)。本书中使用的很多例子都来自那次会议。
 
-尽管本书的初版相对较短，但后续扩展版本（额外的 100 页）是我从JFT（John Taylor）那得到返回和鼓励的结果。John 花费了大量时间寻找可以改进和扩展的细节。
+尽管本书的初版相对较短，但后续扩展版本（额外的 100 页）是我从 JFT（John Taylor） 那得到返回和鼓励的结果。John 花费了大量时间寻找可以改进和扩展的细节。
 
-此外，我要对提供了有关 Lambda 的许多细节返回Dawid Pilarski(panicsoftware.com/about-me)表示感谢  。
+此外，我要对提供了很多有关 Lambda 返回内容的 [Dawid Pilarski](panicsoftware.com/about-me) 表示感谢。
 
 最后也是相当重要的，我从博客读者、Patreon 论坛以及 C++ Polska 的讨论中获得了大量反馈和评论。 谢谢你们！
 ## 校阅历史
@@ -82,11 +82,11 @@ Tomek 在我们位于克拉科夫的 localC++ 用户组中主持了关于 Lambda
 - 为什么辅助函数不够好使
 - C++0x / C++11 中添加新特性的动机
 ## 1. C++98/03 中的可调用对象
-首先来聊聊标准库中基本思想之一的算法，像 std::sort ，std::for_each ，std::transform 等，可以调用任何可调用对象以及调用输入容器中的一个元素。然而，在 C++98/03 中，这些操作只包含指向函数的指针或者仿函数。
+首先来聊聊标准库中基本思想之一的算法，像 `std::sort` ，`std::for_each` ，`std::transform` 等，可以调用任何可调用对象以及调用输入容器中的一个元素。然而，在 C++98/03 中，这些操作只包含指向函数的指针或者仿函数。
 
-举一个例子，我们来看一看一个打印 vector 中全部元素的应用程序。
+举一个例子，我们来看一看一个打印 `vector` 中全部元素的应用程序。
 在第一版中，我们将使用规范的函数：
-代码1-1 基础输出函数
+> 代码1-1 [基础输出函数](https://wandbox.org/permlink/XiMBBTOG122vplUS)
 ```c++
 #include<algorithm>
 #include<iostream>
@@ -103,10 +103,10 @@ int main() {
     std::for_each(v.begin(), v.end(), PrintFunc);
 }
 ```
-上面的代码使用了std::for_each来从 vector 中迭代每个元素（请注意此时的 C++ 为 98/03 版本，尚不支持范围式循环），同时传递了一个可调用对象 PrintFunc 。
+上面的代码使用了 `std::for_each` 来从 `vector` 中迭代每个元素（请注意此时的 C++ 为 98/03 版本，尚不支持范围式循环），同时传递了一个可调用对象 `PrintFunc` 。
 
 我们可以将这个简单的函数转化为一个仿函数：
-代码1-2 基础输出仿函数
+> 代码1-2 [基础输出仿函数](https://wandbox.org/permlink/7OGJzJlfg40SSQUG)
 ```cpp
 #include<algorithm>
 #include<iostream>
@@ -125,10 +125,10 @@ int main() {
     std::for_each(v.begin(), v.end(), PrintFunctor());
 }
 ```
-本用例重载了操作符 () 来定义了一个简单的仿函数。
+本用例重载了操作符 `()` 来定义了一个简单的仿函数。
 
 相较于通常无状态的函数指针，仿函数能够持有成员变量来允许存储状态。一个例子：统计在算法中调用可调用对象的次数。这需要在仿函数中存储一个计数器，并且在每次 lambda 调用时更新计数：
-代码1-3 带有状态的仿函数
+> 代码1-3 [带有状态的仿函数]()
 ```cpp
 #include<algorithm>
 #include<iostream>
@@ -163,7 +163,7 @@ num calls: 2
 ```
 
 我们也可以从调用范围中“捕获”变量。想要达到这个效果，我们需要在仿函数中创建一个成员变量并且在构造器中初始化它。
-代码1-4 带有“捕获”变量的仿函数
+> 代码1-4 [带有“捕获”变量的仿函数](https://wandbox.org/permlink/ogenCfT7ZCTbRIkZ)
 ```cpp
 #include <algorithm>
 #include <iostream>
@@ -203,7 +203,7 @@ num calls: 2
 一个可行的解决办法，那就是再编写一个本地仿函数类，因为 C++ 支持这样的语法，但是这不意味着它能如预期一样工作。
 
 来看看这段代码：
-代码1-5 本地仿函数类
+> 代码1-5 本地仿函数类
 ```cpp
 int main() {
     struct PrintFunctor {
@@ -215,7 +215,7 @@ int main() {
     std::for_each(v.begin(), v.end(), PrintFunctor());
 }
 ```
-您可以用 GCC 来尝试编译它（带上 C++98 的标签 -std=c++98 ），当然不出意外，将会出现如下的编译错误：
+您可以用 GCC 来尝试编译它（带上 C++98 的标签 `-std=c++98` ），当然不出意外，将会出现如下的编译错误：
 ```bash
 error: template argument for
 'template<class _IIter, class _Funct> _Funct
@@ -228,18 +228,18 @@ uses local type 'main()::PrintFunctor'
 ## 3. 使用辅助函数
 使用一些辅助函数或者预定义好的仿函数会如何呢？
 
-如果您查阅过标准库中 <functional> 头文件的源码，你会发现一些可在标准算法中被立即使用的类型或者函数。
+如果您查阅过标准库中 `<functional>` 头文件的源码，你会发现一些可在标准算法中被立即使用的类型或者函数。
 例如：
-- std::plus<T>() - 传入两个参数并返回他们的和
-- std::minus<T>() - 传入两个参数并返回他们的差
-- std::less<T>() - 传入两个参数并判断第一个参数是否小于第二个参数
-- std::greater_equal<T>() - 传入两个参数并判断第一个参数是否大于等于第二个参数
-- std::bind1st - 用给定的第一个参数创建一个可调用对象
-- std::bind2nd - 用给定的第二个参数创建一个可调用对象
+- `std::plus<T>()` - 传入两个参数并返回他们的和
+- `std::minus<T>()` - 传入两个参数并返回他们的差
+- `std::less<T>()` - 传入两个参数并判断第一个参数是否小于第二个参数
+- `std::greater_equal<T>()` - 传入两个参数并判断第一个参数是否大于等于第二个参数
+- `std::bind1st` - 用给定的第一个参数创建一个可调用对象
+- `std::bind2nd` - 用给定的第二个参数创建一个可调用对象
 - 等等
 
 让我们编写一些充分利用这些辅助函数的代码：
-代码1-6 使用旧 C++98/03 的辅助函数
+> 代码1-6 [使用旧 C++98/03 的辅助函数](https://wandbox.org/permlink/9KgfRwwC3Dza2ZVh)
 ```cpp
 #include <algorithm>
 #include <functional>
@@ -257,10 +257,10 @@ int main() {
 这个例子使用 `std::less` 并且用 `std::bind2nd` 来固定第二个参数，同时，这个整体又被传入了 `std::count_if` 。您可能会猜到，这个代码可以展开为一个用来简单判断大小关系的函数：
 `return x < 5;`
 
-如果你准备好使用等多的辅助函数，您也可以看看 boost 库，例如 boost::bind 。
+如果你准备好使用等多的辅助函数，您也可以看看 `boost` 库，例如 `boost::bind` 。
 
 不幸的是，最主要的问题是这种方式十分的复杂并且语法不易学习。举个例子，使用更多的辅助函数将会导致代码变得很不自然。来看看这个：
-代码1-7 组合使用辅助函数
+> 代码1-7 [组合使用辅助函数](https://wandbox.org/permlink/D7XjbyM0i2nslhRU)
 ```cpp
     using std::placeholders::_1;
     std::vector<int> v;
@@ -272,10 +272,10 @@ int main() {
             std::logical_and<bool>(), std::bind(std::greater<int>(), _1, 2), std::bind(std::less_equal<int>(), _1, 6)));
     // _1 comes from the std::placeholder namespace
 ```
-这个组合使用 std::bind （当然了 std::bind 是 C++11 的功能，而不是 C++98/03 ）并结合 std::greater 和 std::less_equal 甚至联系到 std::logical_and 。哦对， _1 是一个第一输入参数的占位符。
+这个组合使用 `std::bind` （当然了 `std::bind` 是 C++11 的功能，而不是 C++98/03 ）并结合 `std::greater` 和 `std::less_equal` 甚至联系到 `std::logical_and` 。哦对， `_1` 是一个第一输入参数的占位符。
 
 尽管上述代码有效，并且您可以在本地定义它，但您不得不忍痛它很复杂且语法不自然。 更何况这个组合只代表一个简单的条件：
-return x > 2 && x <= 6;
+`return x > 2 && x <= 6;`
 
 有什么更好以及更自然的方式吗?
 ## 4. 新特性的动机
@@ -289,7 +289,7 @@ return x > 2 && x <= 6;
 
 这就是 Lambda 表达式的诞生。
 
-如果我们回头看看 N3337 草案—— C++11 的最终草案，我们可以看到关于 lambda 的独立章节[expr.prim.lambda]
+如果我们回头看看 [N3337](https://timsong-cpp.github.io/cppwp/n3337/) 草案 —— C++11 的最终草案，我们可以看到关于 lambda 的独立章节[[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n3337/expr.prim.lambda)
 
 下个章节，我们将一起看看这个新的 C++ 特性。
 # 二、Lambda in C++11
