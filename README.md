@@ -69,27 +69,27 @@
         - [更多技巧](Source/Chapter3/README.md#更多技巧)
         - [使用递归 Lambda 是最好的选择吗？](Source/Chapter3/README.md#使用递归-Lambda-是最好的选择吗)
     - [总结](Source/Chapter3/README.md#8-总结)
-- 四、Lambda in C++17
-    - Lambda 语法更新
-    - 类型系统中的异常规范
-    - constexpr Lambda 表达式
-    - 用例
-    - 捕获变量
-    - constexpr 总结
-    - 捕获 *this
-    - 一些指导性意见
-    - IIFE 更新
-    - 可变泛型 Lambda 的更新
-    - 从多个 Lambda 派生
-    - 自定义模板参数推导规则
-    - 聚合初始化的扩展
-    - std::variant 和 std::visit 的例子
-    - 使用 Lambda 进行并发编程
-    - Lambda 和 std::thread
-    - Lambda 和 std::async
-    - Lambda 和 C++17 的并行算法
-    - Lambda 和异步 - 总结
-    - 总结
+- 四、[Lambda in C++17](Source/Chapter4/README.md)
+    - [Lambda 语法更新](Source/Chapter4/README.md#1-Lambda-语法更新)
+    - [类型系统中的异常规范](Source/Chapter4/README.md#2-类型系统中的异常规范)
+    - [constexpr Lambda 表达式](Source/Chapter4/README.md#3-constexpr-Lambda-表达式)
+        - [用例](Source/Chapter4/README.md#用例)
+        - [捕获变量](Source/Chapter4/README.md#捕获变量)
+        - [constexpr 总结](Source/Chapter4/README.md#constexpr-总结)
+    - [捕获 *this](Source/Chapter4/README.md#4-捕获-this)
+        - [一些指导性意见](Source/Chapter4/README.md#一些指导性意见)
+    - [IIFE 更新](Source/Chapter4/README.md#5-IIFE-更新)
+    - [可变泛型 Lambda 的更新](Source/Chapter4/README.md#6-可变泛型-Lambda-的更新)
+    - [从多个 Lambda 派生](Source/Chapter4/README.md#7-从多个-Lambda-派生)
+        - [自定义模板参数推导规则](Source/Chapter4/README.md#自定义模板参数推导规则)
+        - [聚合初始化的扩展](Source/Chapter4/README.md#聚合初始化的扩展)
+        - [std::variant 和 std::visit 的例子](Source/Chapter4/README.md#std::variant-和-std::visit-的例子)
+    - [使用 Lambda 进行并发编程](Source/Chapter4/README.md#8-使用-Lambda-进行并发编程)
+        - [Lambda 和 std::thread](Source/Chapter4/README.md#Lambda-和-std::thread)
+        - [Lambda 和 std::async](Source/Chapter4/README.md#Lambda-和-std::async)
+        - [Lambda 和 C++17 的并行算法](Source/Chapter4/README.md#Lambda-和-C++17-的并行算法)
+        - [Lambda 和异步 - 总结](Source/Chapter4/README.md#Lambda-和异步---总结)
+    - [总结](Source/Chapter4/README.md#9-总结)
 - 五、Lambda in C++20
     - Lambda语法更新
     - 更新快览
