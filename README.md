@@ -108,4 +108,4 @@
 - 笔记
 
 ## 致谢
-本书 Chapter 17 章节翻译感谢 [@Dup4](https://github.com/Dup4) 同学的支持。
+本书 Chapter 4 C++17 章节翻译感谢 [@Dup4](https://github.com/Dup4) 同学的支持。
