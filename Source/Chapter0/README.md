@@ -5,7 +5,7 @@
 ## 读者反馈
 如果您发现错误、拼写错误、语法错误……或其他任何需要更正的（特别是逻辑问题！），请将您的反馈发送到 bartlomiej.filipek@bfilipek.com。
 您也可以使用这个地方：
-- [Leanpub Book的反馈页面 - C++ Lambda Story](https://leanpub.com/cpplambda)  
+- [Leanpub Book的反馈页面 - C++ Lambda Story](https://leanpub.com/cpplambda)
 更重要的是，这本书在 *GoodReads* 上有一个专门的页面。 请在那里分享您的见解：
 - [C++ Lambda Story @GoodReads](https://www.goodreads.com/book/show/53609731-c-lambda-story)
 ## 代码证书
@@ -51,7 +51,7 @@ Tomek 在我们位于克拉科夫的 Local C++ 用户组中主持了关于 Lambd
 - 2019 年 03 月 25 日 - 第一版上线！
 - 2020 年 01 月 05 日 - 语法、更好的例子、措辞、IIFE 部分、C++20 更新。
 - 2020 年 04 月 17 日 - C++20 章节重写、语法、措辞、布局。
-- 2020 年 04 月 30 日 - 从 C++11、C++17 和 C++20中的 lambda 派生 
+- 2020 年 04 月 30 日 - 从 C++11、C++17 和 C++20中的 lambda 派生
 - 2020 年 06 月 19 日- 主要更新：
   - 改进了 C++03 章节，添加了有关标准库中的辅助函数对象的部分。
   - 添加了有关如何操作的新部分从 C++14 章节中不推荐使用的 bind1stin 转换为现代替代方案。
