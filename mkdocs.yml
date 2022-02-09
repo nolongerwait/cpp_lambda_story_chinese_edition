@@ -164,9 +164,10 @@ markdown_extensions:
 docs_dir: Source
 
 nav:
-  - Chapter0: README.md
-  - Chapter1: Chapter1/README.md
-  - Chapter2: Chapter2/README.md
-  - Chapter3: Chapter3/README.md
-  - Chapter4: Chapter4/README.md
-  - Chapter5: Chapter5/README.md
+  - Getting Started: index.md
+  - 关于此书: Chapter0/README.md
+  - Lambda in C++98/03: Chapter1/README.md
+  - Lambda in C++11: Chapter2/README.md
+  - Lambda in C++14: Chapter3/README.md
+  - Lambda in C++17: Chapter4/README.md
+  - Lambda in C++20: Chapter5/README.md

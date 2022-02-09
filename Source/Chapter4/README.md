@@ -115,7 +115,7 @@ lamEx with x = 20
 动态异常规范在 C++11 中**被弃用**，在 C++17 中**被删除**，只能使用 `noexcept` 关键字去声明一个不会抛出异常的函数。
 
 Question：如果在一个具有 `noexcept` 声明的函数中抛出异常，会发生什么？
-Answer：编译期会调用 `std::terminate`。 
+Answer：编译期会调用 `std::terminate`。
 
 ## 3. `constexpr` Lambda 表达式
 从 C++11 开始，`constexpr` 关键字能够在编译期评估越来越多的代码。这不仅会影响到程序的性能，也让编译期的编码变得更加愉快和有力。
@@ -123,15 +123,15 @@ Answer：编译期会调用 `std::terminate`。
 > 如果函数是声明中带有 `constexpr` 或者 Lambda 表达式的参数声明子句后跟 `constexpr` ，那么这是一个 `constexpr` 函数。
 
 换句话说，如果 Lambda 表达式遵循 `constexpr` 函数的规则，那么 Lambda 表达式对应的 `operator()` 函数被隐式定义为 `constexpr，在` C++17 `中，constexpr` 函数根据 [[dcl.constexpr]](https://timsong-cpp.github.io/cppwp/n4659/dcl.constexpr#3) #3 需要满足以下规则  ：
-> - 不是一个虚函数  
-> - 返回类型是 literal type（可以在编译期计算的变量）  
-> - 所有参数都是 literal type  
-> - 其函数体应为 = delete, = default 或者是一个不包含以下语句的复合语句：  
->   - an asm-definition  
->   - a goto statement  
->   - an identifier label  
->   - try block  
->   - a definition of a variable of non-literal type or of static or thread storage duration or for which no initialisation is performed  
+> - 不是一个虚函数
+> - 返回类型是 literal type（可以在编译期计算的变量）
+> - 所有参数都是 literal type
+> - 其函数体应为 = delete, = default 或者是一个不包含以下语句的复合语句：
+>   - an asm-definition
+>   - a goto statement
+>   - an identifier label
+>   - try block
+>   - a definition of a variable of non-literal type or of static or thread storage duration or for which no initialisation is performed
 
 
 举个栗子：
@@ -143,8 +143,8 @@ static_assert(Square(2) == 4);
 由于 `Square` 函数体非常简单并且它没有违反 `constexpr` 所需的相关规则，所以它被隐式声明为 `constexpr` 并且我们可以使用 `static_assert` 在编译期调用它 。
 
 ### 用例
-有没有更实用的代码例子？  
-我们先实现一个常用的累加算法：  
+有没有更实用的代码例子？
+我们先实现一个常用的累加算法：
 > 代码 4-3 [简单的累加](https://wandbox.org/permlink/E90ctLei3jEHIk9d)
 ```cpp
 #include <array>
@@ -183,7 +183,7 @@ int main() {
         };
         return fact_impl(n, fact_impl);
     };
-    
+
     static_assert(factorial(5) == 120);
 }
 ```
@@ -255,8 +255,8 @@ auto f = [x] {
 简而言之：
 `constexpr` 允许你进行模板编程并且可能使用更短的代码。
 
-> 为将来做准备：  
-> 在 C++20 中，我们将会拥有许多 `constexpr` 标准的算法和容器，比如 `std::vector` 和 `std::string` ，所以 `constexpr` Lamdba 在这种情况下会非常便利。  
+> 为将来做准备：
+> 在 C++20 中，我们将会拥有许多 `constexpr` 标准的算法和容器，比如 `std::vector` 和 `std::string` ，所以 `constexpr` Lamdba 在这种情况下会非常便利。
 > 届时，运行时的代码和编译期运行的代码将会非常相似。
 
 
@@ -332,11 +332,11 @@ const auto var = std::invoke([&] {
 });
 ```
 
-如你所见，不再需要在末尾写上 `()`，而是更清晰的进行调用。  
+如你所见，不再需要在末尾写上 `()`，而是更清晰的进行调用。
 Note： `std::invoke()` 位于 `<functional>` 头文件中。
 
 ## 6. 可变泛型 Lambda 的更新
-在 C++14 章节，我们了解到在泛型 Lamdba 中可以使用 [泛型参数列表](Source/Chapter3/README.md#可变泛型参数)。
+在 C++14 章节，我们了解到在泛型 Lamdba 中可以使用 [泛型参数列表](../Chapter3/README.md#可变泛型参数)。
 感谢 C++17 带来的折叠表达式能够让我们写出更加紧凑的代码。
 > 代码 4-7 [使用折叠表达式实现的求和函数](https://wandbox.org/permlink/2y6y2ZAgSftBjG0S)
 ```cpp
@@ -385,7 +385,7 @@ int main() {
 ```
 我们将得到如下输出：
 ```bash
-1, 2, 3, hello, 10.5, 
+1, 2, 3, hello, 10.5,
 ```
 代码其实可以更短：
 ```cpp
@@ -407,8 +407,8 @@ int main() {
     printer(1, 2, 3, "hello", 10.5f);
 }
 ```
-这一次我们需要使用通用模板参数来输出第一个元素。  
-然后为其余元素使用可变参数列表，并且在输出元素前输出一个逗号分隔符。    
+这一次我们需要使用通用模板参数来输出第一个元素。
+然后为其余元素使用可变参数列表，并且在输出元素前输出一个逗号分隔符。
 代码输出如下：
 ```bash
 1, 2, 3, hello, 10.5
@@ -456,19 +456,19 @@ int main() {
 ```
 在上述的例子中，我们创建了一个由三个 Lambda 组成的 Lamdba 表达式。之后我们可以带上参数调用该 Lamdba 表达式，将会通过传入的参数类型调用所需的函数。
 
-现在让我们仔细看看这个模式核心的两行代码。  
+现在让我们仔细看看这个模式核心的两行代码。
 这两行代码受益于自 C++17 以来可用的三个特性：
 - using 声明的包扩展 - 用更简单且紧凑的代码实现可变模板。
 - 自定义模板参数推导规则 - 允许将 Lamdba 列表转换为重载类的基类列表。（在 C++20 中不需要这么做）。
 - 聚合初始化的扩展 - 在 C++17 之前，不能合并从其它类型派生的初始化类型。
 
-在 C++11 章节中，我们已经使用了 using declaration。  
-这个特性对于使用同一个作用域内的仿函数重载带来很大帮助。  
+在 C++11 章节中，我们已经使用了 using declaration。
+这个特性对于使用同一个作用域内的仿函数重载带来很大帮助。
 在 C++17 我们获得了支持可变参数模板的语法，这在先前的版本中是没有的。
 
 现在让我们试着去理解剩下的两个特性：
 ### 自定义模板参数推导规则
-我们从 Lambda 派生，并且将它们的 `operator()` 暴露出来，上一节看到的那样。  
+我们从 Lambda 派生，并且将它们的 `operator()` 暴露出来，上一节看到的那样。
 那么我们如何创建这种重载类型的变量呢？
 
 像你知道的那样，我们无法预先知道某一个 Lambda 的类型，因为编译器会为每一个 Lambda 生成一个唯一的类型名称。例如，我们不能写下如下的代码：
@@ -519,7 +519,7 @@ overloaded myOverload { [](int) { }, [](double) { } };
 
 现在让我们进入最后一个小节 - 聚合初始化
 ### 聚合初始化的扩展
-这个功能相对简单：我们可以聚合初始化一个从其它类型派生的类型。  
+这个功能相对简单：我们可以聚合初始化一个从其它类型派生的类型。
 来自这个标准 [[dcl.init.aggr]](https://timsong-cpp.github.io/cppwp/n4659/dcl.init.aggr)：
 
 > An aggregate is an array or a class with:
@@ -579,7 +579,7 @@ struct overloaded : Fs... {
 现在看来似乎 `std::variant` 更为方便。
 ### `std::variant` 和 `std::visit` 的例子
 
-我们可以使用继承和重载模式来做一些更实用的事情。  
+我们可以使用继承和重载模式来做一些更实用的事情。
 先看一个 `std::variant` 和 `std::visit` 的例子
 > 代码 4-12 [使用 `variant` 和 `visit` 实现重载模式](https://wandbox.org/permlink/TWx5fV2D0bwCWnxO)
 ```cpp
@@ -622,12 +622,12 @@ int main() {
 其中，我们有一个 `std::visit` 的调用，它创建了一个 `visitor` ，重载了三种类型，三个函数都是将当前值赋值一份，只是类型不同。
 
 ## 8. 使用 Lambda 进行并发编程
-如果在同一个线程中调用 Lamdba 是比较容易的情形。  
-但是如果你想在一个单独的线程中调用 Lamdba 的话，应该怎么做？  
-可能会遇到什么问题？  
-让我们在本节中展开说说。  
+如果在同一个线程中调用 Lamdba 是比较容易的情形。
+但是如果你想在一个单独的线程中调用 Lamdba 的话，应该怎么做？
+可能会遇到什么问题？
+让我们在本节中展开说说。
 
-> 本节不是关于如何用 C++ 编写并发代码的教程，旨在展示您在异步代码中使用 lambda 可能会遇到的问题。  
+> 本节不是关于如何用 C++ 编写并发代码的教程，旨在展示您在异步代码中使用 lambda 可能会遇到的问题。
 > 有关 C++ 中的并发问题，您可以参考单独的书籍，例如 Rainer Grimm 的 《[Concurrency with Modern C++](https://leanpub.com/concurrencywithmodernc)》 或者 Anthony Williams 的 《[C++ Concurrency in Action](https://www.amazon.com/C-Concurrency-Action-Anthony-Williams/dp/1617294691/ref=as_li_ss_tl?dchild=1&keywords=concurrency+C+++williams&qid=1594551073&sr=8-1&linkCode=sl1&tag=bfilipek-20&linkId=20fd1d68c301de792ad0b0e7a30c661a&language=en_US)》。
 
 
@@ -661,12 +661,12 @@ int main() {
 }
 ```
 
-在上述的例子中，我们使用 Lamdba 表达式创建了一个线程。  
+在上述的例子中，我们使用 Lamdba 表达式创建了一个线程。
 `std::thread` 类拥有非常灵活的构造函数，所以我们甚至能够在 Lamdba 中传入一个参数，在上述代码中，我们将 `10` 作为 `startArg` 传给了 Lamdba。
 
 上述代码很简单，因为我们通过 `join` 控制了线程的执行，保证我们在输出 `numbers` 之前， `numbers` 里的数据一定会准备好。
 
-关键的是，虽然 Lamdba 使得创建线程变得更加容易和方便，但是它仍然是异步执行的。  
+关键的是，虽然 Lamdba 使得创建线程变得更加容易和方便，但是它仍然是异步执行的。
 闭包并不会改变其异步执行的特性，闭包同样会受到所有竞争条件和阻塞的影响。
 
 我们可以看一下下面的例子：
@@ -707,7 +707,7 @@ int main() {
 
 虽然您可能希望的最终结果是 `0`，但是结果是未定义的。当一个线程正在读该变量的时候，可能正在有另外一个变量在并发写，导致最终的结果是未定义的。
 
-为了解决这个问题，与常规线程场景一样，我们应该使用某种同步机制。  
+为了解决这个问题，与常规线程场景一样，我们应该使用某种同步机制。
 比如上面那个例子，我们可以使用较为易用的原子变量。
 > 代码 4-15 [使用原子变量](https://wandbox.org/permlink/8Te9dhfQ4r9jvOXf)
 ```cpp
@@ -739,22 +739,22 @@ int main() {
     std::cout << counter.load() << std::endl;
 }
 ```
-上面的代码会按我们的预期进行执行，因为增加和减少操作现在是原子的。   
-这意味着当 counter 改变的时候，其它线程不能中断这个操作。  
-「同步」使得代码更加安全，但是需要以性能作为牺牲。  
-然后这也是一个需要值得出一本书来长久讨论的主题。  
+上面的代码会按我们的预期进行执行，因为增加和减少操作现在是原子的。
+这意味着当 counter 改变的时候，其它线程不能中断这个操作。
+「同步」使得代码更加安全，但是需要以性能作为牺牲。
+然后这也是一个需要值得出一本书来长久讨论的主题。
 
-解决同步问题的另外一个选择是在计算的每个线程中都有一个局部变量。  
-然后在线程结束之前，我们可以去锁定并且更新全局变量。  
+解决同步问题的另外一个选择是在计算的每个线程中都有一个局部变量。
+然后在线程结束之前，我们可以去锁定并且更新全局变量。
 值得补充的一点是，将变量定义为 `volatile` 并不能提供正确的同步机制，并且在 C++20 中 `volatile` 在许多地方被弃用。
 
-正如我们所见，使用 Lambda 表达式创建线程非常方便。  
+正如我们所见，使用 Lambda 表达式创建线程非常方便。
 它可以与线程声明在一起，并且可以做任何你在常规函数和仿函数中能够做的事情。
 
-现在让我们来尝试一下在 C++ 中新引入的另外一个科技。  
+现在让我们来尝试一下在 C++ 中新引入的另外一个科技。
 ### Lambda 和 `std::async`
-您可以使用多线程的第二种方法是通过 `std::async`。  
-我们在 C++11 中通常将这个功能与线程一起使用。  
+您可以使用多线程的第二种方法是通过 `std::async`。
+我们在 C++11 中通常将这个功能与线程一起使用。
 这是一个高级 API，允许您延迟或完全异步地调用和计算。
 
 现在让我们将 `iota` 的例子使用 `std::async` 来实现：
@@ -783,12 +783,12 @@ int main() {
     for (const auto& num : numbers) std::cout << num << ", ";
 }
 ```
-这一次，我们没有使用线程，而是依赖了 `std::future` 机制来实现。  
+这一次，我们没有使用线程，而是依赖了 `std::future` 机制来实现。
 这是一个处理同步并保证调用结果在我们通过 `.get()` 请求时可用的对象。
 
 在这个例子中，我们通过 `std::async` 调度 Lambda 的执行，然后通过调用 `.get()` 来等待这些被调度的任务执行完毕。
 
-然后，上面的代码实现不够优雅。因为我们使用了 `future<void>` 并且使用引用捕获了 `numbers。`  
+然后，上面的代码实现不够优雅。因为我们使用了 `future<void>` 并且使用引用捕获了 `numbers。`
 更好的解耦方式应该是使用 `std::future<std::vector<int>>`，然后通过 `future` 的 `.get()` 机制来传递结果。像是下述代码写的一样：
 ```cpp
 std::future<std::vector<int>> iotaFuture = std::async(std::launch::async, [starArg = 10]() {
@@ -800,8 +800,8 @@ std::future<std::vector<int>> iotaFuture = std::async(std::launch::async, [starA
 auto vec = iotaFuture.get();  // make sure we get the results...// ...
 ```
 
-长久以来，`std::async/std::future` 似乎获得了褒贬不一的评价。  
-看起来可能是实现的太粗鲁了。  
+长久以来，`std::async/std::future` 似乎获得了褒贬不一的评价。
+看起来可能是实现的太粗鲁了。
 它适用于相对简单的情况，在一些复杂的情况下可能没那么有效，例如：
 - continuation
 - task merging
@@ -815,21 +815,21 @@ auto vec = iotaFuture.get();  // make sure we get the results...// ...
 - [Core C++ 2019 :: Avi Kivity :: Building efficient I/O intensive applications with Seastar](https://www.youtube.com/watch?v=p8d28t4qCTY)
 
 ### Lambda 和 C++17 的并行算法
-在讨论了 C++11 的线程支持后，我们可以转向更新的标准：C++17。  
-这次有一个超级好用的技巧，允许您并行化标准库中的大多数算法。  
-您所要做的就是在算法中指定第一个参数，例如：  
+在讨论了 C++11 的线程支持后，我们可以转向更新的标准：C++17。
+这次有一个超级好用的技巧，允许您并行化标准库中的大多数算法。
+您所要做的就是在算法中指定第一个参数，例如：
 ```cpp
 auto myVec = GenerateVector();
 std::sort(std::execution::par, myVec.begin(), myVec.end());
 ```
-值得注意的是我们指定了第一个参数 `std::execution::par` 。它将为排序算法开启并发执行的特性。 
+值得注意的是我们指定了第一个参数 `std::execution::par` 。它将为排序算法开启并发执行的特性。
 
-我们还有其它的特性：  
-| 特性名 | 描述 |
-| --- | ---- | 
-| sequenced_policy | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行不能并行化。|
-| parallel_policy | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行可以并行化。|
-| parallel_unsequenced_policy | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行可以并行化和向量化。|
+我们还有其它的特性：
+| 特性名                      | 描述                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| sequenced_policy            | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行不能并行化。         |
+| parallel_policy             | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行可以并行化。         |
+| parallel_unsequenced_policy | 这是一种执行策略类型，用作消除并行算法重载的歧义并指示并行算法的执行可以并行化和向量化。 |
 
 对于每一种特性来说，我们预先定义了全局对象，你可以将它传递给特定的算法：
 - `std::execution::par`
@@ -840,7 +840,7 @@ std::sort(std::execution::par, myVec.begin(), myVec.end());
 
 在 C++20 中还有另外一种执行策略：`unsequenced_policy` 以及其对应的全局对象 `std::execution::unseq`。它用于在单线程上启用向量化执行。
 
-虽然我们可以轻松的启用并行排序，但是我们也很有可能写出如下糟糕的代码：  
+虽然我们可以轻松的启用并行排序，但是我们也很有可能写出如下糟糕的代码：
 > 代码 4-17 [向 vector 中拷贝的危险行为](https://wandbox.org/permlink/pK63LEwKymZJC6Ne)
 ```cpp
 #include <execution>
@@ -861,24 +861,24 @@ int main() {
 }
 ```
 
-上述代码不包含任何的第三方库，但是需要支持并行算法的编译器。  
+上述代码不包含任何的第三方库，但是需要支持并行算法的编译器。
 这在 MSVC（始于 VS 2017）中是可能可以运行的，但是不适合于任何在线编译器，你可以将该代码拷贝到 Visual Studio 上运行。
 
 译者注：现在可以在 Wandbox 上跑了。
 
 你看到这里的问题所在了吗？
 
-通过将 Lamdba 传递给 `std::for_each`，我们需要记住代码不会运行在单线程中。  
-这里可能会使用多线程，例如：线程池的解决方案。  
+通过将 Lamdba 传递给 `std::for_each`，我们需要记住代码不会运行在单线程中。
+这里可能会使用多线程，例如：线程池的解决方案。
 这就是为什么访问共享输出变量不是一个好主意。它不仅可能会以错误的顺序插入元素，而且如果多个线程同时尝试更改变量，它甚至会崩溃。
 
-我们可以通过在每次调用 `push_back` 之前使用互斥锁并锁定它来解决同步问题。  
-但是上述的代码仍然高效吗？  
-如果过滤的条件简单且执行速度较快，那么上述代码的性能甚至会低于其对应的串行版本的代码。  
+我们可以通过在每次调用 `push_back` 之前使用互斥锁并锁定它来解决同步问题。
+但是上述的代码仍然高效吗？
+如果过滤的条件简单且执行速度较快，那么上述代码的性能甚至会低于其对应的串行版本的代码。
 
 如果没有实际运行过，您不知道 `output` 中元素的顺序。
 
-这一节展示了基本的并行算法，如果你想了解的更多，可以阅读以下文章：  
+这一节展示了基本的并行算法，如果你想了解的更多，可以阅读以下文章：
 - [The Amazing Performance of C++17 Parallel Algorithms, is it Possible?](https://www.cppstories.com/2018/11/parallel-alg-perf/)
 
 ### Lambda 和异步 - 总结
@@ -886,11 +886,11 @@ int main() {
 但是必须要记住的一点是，闭包对象在并发性方面并没有特殊性，所有的挑战和困难也都是基于此。
 
 ## 9. 总结
-在本章节中，您已经看到了 C++17 加入了 C++ 中的两个基本元素， `constexpr` 和 Lamdba。  
-现在你可以配合 `constexpr` 使用 Lamdba 表达式了。  
-这是改进语言中元编程支持的必要步骤。  
-我们将在 C++20 的章节中看到更多关于此的内容。  
-更重要的是，C++17 标准也解决了捕获的问题，从 C++17 开始，您可以通过 `[*this]` 对 `this` 进行值捕获，从而使代码更加安全。  
+在本章节中，您已经看到了 C++17 加入了 C++ 中的两个基本元素， `constexpr` 和 Lamdba。
+现在你可以配合 `constexpr` 使用 Lamdba 表达式了。
+这是改进语言中元编程支持的必要步骤。
+我们将在 C++20 的章节中看到更多关于此的内容。
+更重要的是，C++17 标准也解决了捕获的问题，从 C++17 开始，您可以通过 `[*this]` 对 `this` 进行值捕获，从而使代码更加安全。
 
-我们还查看了 Lamdba 相关的一些例子：IIFE 技术、折叠表达式和可变参数泛型 Lamdba，从多个 Lamdba 进行派生已经异步代码的执行。  
+我们还查看了 Lamdba 相关的一些例子：IIFE 技术、折叠表达式和可变参数泛型 Lamdba，从多个 Lamdba 进行派生已经异步代码的执行。
 由于在 C++17 中支持的各种功能，我们现在有更好的语法和更直接的方法来编写更高效的代码。
