@@ -2,7 +2,7 @@
 
 ## 介绍
 
-本文为《C++ Lambda Story》的中文翻译，如果您觉得次数有价值，可以在 [https://leanpub.com/cpplambda](https://leanpub.com/cpplambda) 上支持下原作者。
+本文为《C++ Lambda Story》的中文翻译，如果您觉得此书有价值，可以在 [https://leanpub.com/cpplambda](https://leanpub.com/cpplambda) 上支持下原作者。
 
 或者如果您认识相关的翻译工作者或者出版社，可以积极联系原作者与出版社进行正规的中文翻译并出版。
 
