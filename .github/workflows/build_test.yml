@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
+name: Build Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-doc:
+    name: Build documentation
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python runtime
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+          architecture: x64
+
+      - name: Install Python dependencies
+        run: |
+          pip3 install -U -r requirements.txt
+
+      - name: Build
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        run: |
+          bash -e build.sh
