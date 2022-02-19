@@ -1,10 +1,7 @@
-markupsafe==2.0.1
+mkdocs-material >= 8.2.1
 
-mkdocs-material == 8.2.1
-
-mkdocs-macros-plugin == 0.6.0
-mkdocs-minify-plugin == 0.4.0
-mkdocs-redirects == 1.0
-mkdocs-rss-plugin == 0.17
-mkdocs-git-revision-date-localized-plugin == 0.9.3
-git+https://github.com/facelessuser/pymdown-lexers.git
+mkdocs-minify-plugin >= 0.5
+mkdocs-macros-plugin >= 0.6
+mkdocs-redirects >= 1.0
+mkdocs-rss-plugin >= 0.21
+mkdocs-git-revision-date-localized-plugin >= 0.12
