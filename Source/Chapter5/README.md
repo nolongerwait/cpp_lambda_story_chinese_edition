@@ -2,6 +2,7 @@
 2020 年 2 月，在捷克首都布拉格的会议上，ISO 委员会最终通过 C++20 标准，并宣布其将于 2020 年末正式发布。新的标准规范为 C++ 语言本身和标准库都带来了诸多显著性的提升和改进！ Lambda 表达式也得到了一些更新。
 
 本章中，主要关注下列内容：
+
 - C++20 中的变化
 - 新的选择 - 捕获 `this` 指针
 - 模板 Lambda
@@ -12,9 +13,11 @@
 你可以在 [N4681](https://timsong-cpp.github.io/cppwp/n4861/) 中的 [[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4861/expr.prim.lambda) 章节查阅标准规范中 Lambda 相关的内容。
 ## 1. Lambda 语法更新
 在 C++20 中，Lambda 的语法得到了改进：
+
 - 现在可以在参数列表后添加 `consteval` 关键字
 - 现在明确模板尾（template tail）是可选的
 - 现在在尾部返回后，可以添加 `requires` 声明
+
 ```cpp
 [] <tparams> () specifiers exception attr -> ret requires { /*code; */ }
 ^  ^          ^  ^                            ^
@@ -31,6 +34,7 @@ lambda introducer with an optional capture list
 ```
 ## 2. 更新快览
 C++20 中 Lambda 表达式的相关特性：
+
 - 允许 `[=, this]` 作为 Lambda 捕获 - [P0409R2](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0409r2.html) 并且弃用了通过 `[=]` 隐式捕获 `this` - [P0806](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0806r2.html)
 - 初始化捕获中的包扩展：`[...args = std::move(args)](){}` - [P0780](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0780r2.html)
 - `static` ， `thread_local` 和 Lambda 捕获的结构化绑定 - [P1091](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1091r3.html)
