@@ -1,17 +1,21 @@
 # 三、Lambda in C++14
 C++14 为 Lambda 表达式提供了两个显著的增强特性
+
 - 带有初始化的捕获
 - 泛型 Lambda
 此外，该标准还更新了一些规则，例如：
 - Lambda 表达式的默认参数
 - `auto` 返回类型
+
 这些新增特性可以在 [N4140](https://timsong-cpp.github.io/cppwp/n4140/) 中的 Lambda 部分 [[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda) 找到。
 
 在本章中，你将学到：
+
 - 捕获成员变量
 - 用现代 C++ 技术代替旧功能，如 `std::bind1st`
 - LIFTING
 - 递归 Lambda
+
 ## 1. 为 Lambda 增加默认参数
 让我们从小的变化说起吧：
 在 C++14 中，你可以在 Lambda 调用中使用默认参数了。这一小小的更新让 Lambda 函数更像一个常规函数了。
