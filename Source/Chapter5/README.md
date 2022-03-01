@@ -74,7 +74,7 @@ int main() {
 
 C++20 标准也有关于 `*this` 捕获的阐明。现在在方法中进行值捕获 `[=]` 会收到一条警告：
 > 代码5-2 [隐式捕获 `*this` 的警告](https://wandbox.org/permlink/yRosU85B0Q9LnwOv)
-```
+```cpp
 struct Baz {
     auto foo() {
         return [=] { std::cout <<s <<'\n'; };
@@ -110,7 +110,7 @@ int main() {
 C++20 中还对 Lambda 中初始化捕获的包扩展带来了一个提升：
 ```cpp
 template<typename...Args>
-void call(Args&& ... args) { 
+void call(Args&& ... args) {
     auto ret = [...capturedArgs = std::move(args)](){};
 }
 ```
@@ -152,7 +152,7 @@ C++14 中就已经引入了泛型 Lambda，并且可以在模板中将参数类�
 ```
 编译器会生成一个调用操作符对应以下的模板方法：
 ```cpp
-template <typename T> 
+template <typename T>
 void operator ()(T x) { x; }
 ```
 但是，这似乎没有办法去直接改变这个模板的参数，并且使用“真实”的模板参数。 C++20 下，这都是可能的。
@@ -258,7 +258,7 @@ void signedIntsOnly(T val) {}
 好了，简单了解了 `concept` 之后，那么怎么跟 Lambda 关联起来呢？
 
 关键部分就在于精炼语法以及约束 `auto` 模板参数。
-**简化和精炼的语法**  
+**简化和精炼的语法**
 得益于 `concept` 精炼的语法特性，你也可以不用在编写模板时候带有 `template<typename ..>` 部分了。
 
 使用无约束的 `auto` ：
@@ -276,7 +276,7 @@ void myTemplateFunction (auto val) {}
 ```
 换句话说，对于lambda，我们可以利用它精炼的风格，例如对泛型 Lambda 参数添加额外的限制。
 ```cpp
-auto GenLambda = [](SignedIntegral auto param) { return param * param + 1; } 
+auto GenLambda = [](SignedIntegral auto param) { return param * param + 1; }
 ```
 上面的例子利用 `SignedIntegral` 来限制 `auto` 参数。但是整个表达式比起模板 Lambda 看上去更加的可读，这就是为什么我们要着重讨论的点了。
 
@@ -352,7 +352,7 @@ int main() {
     };
     const std::set<Product, decltype(nameCmp)> prodSet{
             {"Cup", 10, 100.0}, {"Book", 2, 200.5}, {"TV set", 1, 2000}, {"Pencil", 4, 10.5}};
-    for (const auto& elem : prodSet) 
+    for (const auto& elem : prodSet)
         std::cout << elem._name << '\n';
 }
 ```
@@ -403,7 +403,7 @@ std::map<int, int, decltype([](int x, int y) { return x >y; })> map;
 #include <array>
 #include <numeric>
 int main() {
-    constexpr std::array arr{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};  
+    constexpr std::array arr{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     // with constexpr lambda
     static_assert(std::accumulate(begin(arr), end(arr), 0, [](auto a, auto b) noexcept {
         return a + b;
@@ -428,8 +428,8 @@ int main() {
     return minVal;
 }
 ```
-> 哪些标准算法是可以 `constexpr` 的呢？  
-> 所有 `<algorithm>` ，`<utility>` 和 `<numeric>` 头文件中的算法现在都可以被关键字 `constexpr` 标记。除了 `shuffle`, `sample`, `stable_sort`, `stable_partition`, `inplace_merge` 这些，以及接受执行策略参数的函数或重载函数。  
+> 哪些标准算法是可以 `constexpr` 的呢？
+> 所有 `<algorithm>` ，`<utility>` 和 `<numeric>` 头文件中的算法现在都可以被关键字 `constexpr` 标记。除了 `shuffle`, `sample`, `stable_sort`, `stable_partition`, `inplace_merge` 这些，以及接受执行策略参数的函数或重载函数。
 > 具体的内容可以查阅 [P0202](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0202r3.html) ， [P0879](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0879r0.html) 和 [P1645](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1645r1.html) 。
 
 ## 9. C++20 对重载模式的更新

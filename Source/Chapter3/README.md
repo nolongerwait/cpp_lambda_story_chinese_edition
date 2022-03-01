@@ -9,7 +9,7 @@ C++14 为 Lambda 表达式提供了两个显著的增强特性
 
 在本章中，你将学到：
 - 捕获成员变量
-- 用现代 C++ 技术代替旧功能，如 `std::bind1st` 
+- 用现代 C++ 技术代替旧功能，如 `std::bind1st`
 - LIFTING
 - 递归 Lambda
 ## 1. 为 Lambda 增加默认参数
@@ -47,9 +47,9 @@ auto myFunction() {
 如果在 Lambda 中有多条返回语句，他们必须能够推断出同样的类型：
 ```cpp
 auto foo = [](int x){
-    if (x < 0) 
+    if (x < 0)
         return x * 1.1f
-    else 
+    else
         return x * 2.1
 }
 ```
@@ -114,7 +114,7 @@ int main() {
     const auto foo = [z = x + y]() {
         std::cout << z << '\n';
     };
-    
+
     x = 0;
     y = 0;
     foo();
@@ -134,7 +134,7 @@ struct _unnamedLambda {
     void operator()() const{
         std::cout << z << '\n';
     }
-    
+
     int z;
 } someInstance;
 ```
@@ -179,7 +179,7 @@ auto captureTest(Args... args) {
 ### 对现有问题的改进
 总而言之，这个新的 C++14 特性可以解决一些问题，例如 仅可移动类型 或 允许一些额外的优化。
 
-**Move 移动**  
+**Move 移动**
 在 C++11 中，你无法通过值捕获的方式捕获一个唯一指针（ `unique_pointer` ），只能进行引用捕获。但是现在在 C++14 中，我们可以移动一个对象到闭包类型的成员中：
 > 代码3-6 [捕获一个仅可移动类型](https://wandbox.org/permlink/n65fzPHrNnyDqbIK)
 ```cpp
@@ -202,7 +202,7 @@ pointer in lambda: 0x1413c20
 ```
 有了捕获初始化器，你就可以移动一个指针的所有权到 Lambda 中。如你所见，在上面这个例子中，唯一指针在闭包对象被创建后立即被设为了 `nullptr` 。但是当你调用这个 Lambda 时，你会看见一个合法的内存地址。
 
-**`std::function` 中的陷阱**  
+**`std::function` 中的陷阱**
 在lambda中拥有一个仅可移动的捕获变量会让闭包对象变得不能被拷贝。当你想在 `std::function` 中存储一个 Lambda，而这个 Lambda 接受仅可拷贝的可调用对象的时候，就会出现问题。
 
 我们在 C++ Insights 上观察一下之前的一个例子（[在线预览](https://cppinsights.io/s/5d11eb8f)），你会发现 `std::unique_ptr` 是一个闭包类型的成员变量。但是，拥有一个仅可移动的成员会阻止编译器创建一个默认拷贝构造的。
@@ -216,7 +216,7 @@ std::function<void()> fn = [ptr = std::move(p)](){}; //不可编译
 如果您想要完整的细节，您还可以查看草案([P0288]())中的 any_invokable ，这是 `std::function` 未来可能的改进，并且还会处理仅可移动类型。
 
 
-**优化 Optimisation**  
+**优化 Optimisation**
 有一个将捕获初始化器作为潜在的性能优化的点子：我们可以在初始化器中计算一次，而不是每次调用 Lambda 时都计算某个值：
 > 代码3-8 [给 Lambda 创建一个 `string`](https://wandbox.org/permlink/GWcJNoUsBFnscOp3)
 ```cpp
@@ -247,7 +247,7 @@ int main() {
 
 该示例还使用了 `std::string_literals` ，这就是为什么我们可以编写代表 `std::string` 对象的 `"foo"s`。
 
-**捕获成员变量**  
+**捕获成员变量**
 初始化器也被用来捕获成员变量。我们可以捕获一个成员变量的拷贝并且不用担心悬空引用。
 
 看个例子吧：
@@ -262,7 +262,7 @@ struct Baz {
             std::cout << s << std::endl;
         };
     }
-    
+
     std::string s;
 };
 
@@ -414,7 +414,7 @@ int main() {
 
 修复一下代码，它本应该是这样的：
 ```cpp
-std::for_each(std::begin(numbers), std::end(numbers), 
+std::for_each(std::begin(numbers), std::end(numbers),
     [](const auto& entry) {
         std::cout << entry.first << " = " << entry.second << '\n';
     });
@@ -434,12 +434,12 @@ int main() {
     // print addresses:
     for (auto mit = numbers.cbegin(); mit != numbers.cend(); ++mit)
         std::cout << &mit->first << ", " << &mit->second << '\n';
-        
+
     // each time entry is copied from pair<const string, int>!
     std::for_each(std::begin(numbers), std::end(numbers), [](const std::pair<std::string, int>& entry) {
         std::cout << &entry.first << ", " << &entry.second << ": " << entry.first << " = " << entry.second << '\n';
     });
-    
+
     // this time entries are not copied, they have the same addresses
     std::for_each(std::begin(numbers), std::end(numbers), [](const auto& entry) {
         std::cout << &entry.first << ", " << &entry.second << ": " << entry.first << " = " << entry.second << '\n';
@@ -475,7 +475,7 @@ int main() {
 - bind2nd()/binder2nd
 - ptr_fun()
 - mem_fun()
-- mem_fun_ref()  
+- mem_fun_ref()
 
 当然，仅仅是为了替换 `bind1st` 或者 `bind2nd` 的话，你可以使用 `std::bind` ( C++11 引入)或者 `std::bind_front` ( C++20 引入)。
 
@@ -491,7 +491,7 @@ std::cout << onePlus(10) << ", " << minusOne(10) << '\n';
 
 上面的语法可能会十分的麻烦，我们下面来看看如何用现代化 C++ 技术来优化他们。
 ### 使用现代 C++ 技术
-我们首先用 `std::bind()` 来替换 `bind1st` 和 `bind2nd` 
+我们首先用 `std::bind()` 来替换 `bind1st` 和 `bind2nd`
 > 代码3-15 [用 `std::bind` 来代替](https://godbolt.org/z/bj9Txh)
 ```cpp
 #include <algorithm>
@@ -534,7 +534,7 @@ int main() {
     using std::placeholders::_1;
     const std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9};
     const auto val = std::count_if(v.begin(), v.end(),
-            std::bind(std::logical_and<bool>(), 
+            std::bind(std::logical_and<bool>(),
                 std::bind(std::greater<int>(), _1, 2),
                     std::bind(std::less<int>(), _1, 6)
                 )
@@ -571,7 +571,7 @@ int main() {
 这个例子里面 `foo` 分别有对于 `int` 和 `float` 的两个重载，并且作为可调用对象传递给了模板函数 `for_each` 。遗憾的是，在 GCC9 中，编译会提示如下错误：
 ```bash
 error: no matching function for call to
-for_each(std::vector<int>::iterator, std::vector<int>::iterator, 
+for_each(std::vector<int>::iterator, std::vector<int>::iterator,
  <unresolved overloaded function type>)
     std::for_each(vi.begin(), vi.end(), foo);
                                        ^^^^^
@@ -587,7 +587,7 @@ std::for_each(vi.begin(), vi.end(), [](auto x) { return foo(x); });
 当然，我们也可以使用完美转发来更加巧妙的规避掉重载的情况。
 ```cpp
 std::for_each(vi.begin(), vi.end(), [](auto &&x) {
-    return foo(std::forward<decltype(x)>(x); 
+    return foo(std::forward<decltype(x)>(x);
 });
 ```
 下面是一个应用的例子：
@@ -623,7 +623,7 @@ int main() {
     }
 ```
 看着有点懵？别急，我们来一点点解析这段代码的功能。
-- 返回 `foo(std::forward<decltype(x)>(x)...)` 
+- 返回 `foo(std::forward<decltype(x)>(x)...)`
   - 完美转发，这样我们才能完整传递输入参数到 `foo` 函数中，并且保留类型。
 - `noexcept(noexcept(foo(std::forward<decltype(x)>(x)...)))`
   - 使用 `noexcept` 操作符（被嵌套的那一个）检查 可调用对象 `foo` 的异常规范。依赖于异常的检查结果，最终会产生 `noexcept(true)` 或者 `noexcept(false)` 。
