@@ -1,7 +1,7 @@
-mkdocs-material >= 8.2.1
+mkdocs-material >= 8.2.3
 
 mkdocs-minify-plugin >= 0.5
 mkdocs-macros-plugin >= 0.6
 mkdocs-redirects >= 1.0
 mkdocs-rss-plugin >= 0.21
-mkdocs-git-revision-date-localized-plugin >= 0.12
+mkdocs-git-revision-date-localized-plugin >= 1.0.0
