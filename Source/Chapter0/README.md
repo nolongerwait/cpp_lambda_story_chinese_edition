@@ -3,9 +3,11 @@
 ## 成书渊源
 
 ## 阅读对象
+
 本书适用于所有喜欢了解现代 C++ 特性：Lambda 表达式 的 C++ 开发人员。
 
 ## 读者反馈
+
 如果您发现错误、拼写错误、语法错误……或其他任何需要更正的（特别是逻辑问题！），请将您的反馈发送到 bartlomiej.filipek@bfilipek.com。
 
 您也可以使用这个地方：
@@ -17,12 +19,14 @@
 - [C++ Lambda Story @GoodReads](https://www.goodreads.com/book/show/53609731-c-lambda-story)
 
 ## 代码证书
+
 这本书的代码在 **知识共享许可（Creative Commons License）** 下可用
 
 ## 代码格式
 
 ## 语法高亮限制
 ## 在线编译器
+
 你可以使用一些在线编译器，这样就不用在本地创建项目来尝试运行和解读这些示例代码了。
 
 这些在线编译器提供基础的文本编辑器，并且通常允许你自行编写源文件进行编译。
@@ -41,6 +45,7 @@
 
 当然，如果想尝试其他 C++ 的在线编译器，你也可以在这个网站查看：[List of Online C++ Compilers by arnemertz](https://arnemertz.github.io/online-compilers/)
 ## 关于作者
+
 **Bartłomiej (Bartek) Filipekis**，一个拥有超过 12 年专业经验的 C++ 软件开发工程师。2010年在 Cracow, Poland 毕业自 Jagiellonian University ，拥有计算机科学的硕士学位。
 
 现就职于 Xara，负责开发高级文档编辑器。
@@ -66,6 +71,7 @@
 Bartek 也是《[C++ 17 In Detail](https://leanpub.com/cpp17indetail)》的作者。
 
 ## 致谢
+
 如果没有 C++ 专家 Tomasz Kamiński 的宝贵意见，本书就不可能完成（参见 [Tomek 在 Linkedin 上的简介](https://www.linkedin.com/in/tomasz-kami%C5%84ski-208572b1/)）。
 
 Tomek 在我们位于克拉科夫的 Local C++ 用户组中主持了关于 Lambda “历史”的现场编码演示：[Lambdas: From C++11 to C++20](https://www.meetup.com/pl-PL/C-User-Group-Cracow/events/258795519/)。
@@ -81,6 +87,7 @@ John 花费了大量时间寻找可以改进和扩展的细节。
 最后也是相当重要的，我从博客读者、Patreon 论坛以及 C++ Polska 的讨论中获得了大量反馈和评论。
 
 谢谢你们！
+
 ## 校阅历史
 
 - 2019 年 03 月 25 日 - 第一版上线！
