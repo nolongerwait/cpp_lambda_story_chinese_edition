@@ -1,4 +1,5 @@
 # 三、Lambda in C++14
+
 C++14 为 Lambda 表达式提供了两个显著的增强特性
 
 - 带有初始化的捕获
@@ -17,6 +18,7 @@ C++14 为 Lambda 表达式提供了两个显著的增强特性
 - 递归 Lambda
 
 ## 1. 为 Lambda 增加默认参数
+
 让我们从小的变化说起吧：
 
 在 C++14 中，你可以在 Lambda 调用中使用默认参数了。这一小小的更新让 Lambda 函数更像一个常规函数了。
@@ -40,6 +42,7 @@ int main() {
 不过，这一特性早已在 GCC 和 Clang 的 C++11 版本中被支持了。
 
 ## 2. 返回类型
+
 如果你还记得之前章节的内容，那么你一定知道，对于一个简单的 Lambda ，编译器可以推断出它的返回类型。
 
 这个功能是在常规函数上“扩展”的，在 C++14 中你可以使用 `auto` 作为返回类型
@@ -131,6 +134,7 @@ int main() {
 但是 `std::function` 就不行了。
 
 ## 3. 带有初始化的捕获
+
 现在我们来讲讲更加具有建设性的更新。
 
 你一定记得，在 Lambda 表达式中，你可以从外部范围中捕获变量。
@@ -224,6 +228,7 @@ int main() {
 这是因为我们进行了一个引用捕获，当你修改了引用内容时，对象 `z` 自然也会随之变化。
 
 ### 限制
+
 需要注意，在使用初始化器捕获时，有一些限制：
 
 一个是，当你通过初始化器进行引用捕获时，她不可能写入一个右值引用 `&&` 。这是因为如下的代码目前是非法的：
@@ -248,6 +253,7 @@ auto captureTest(Args... args) {
 但是，这个语法，在 C++20 中是支持的，如果想提前了解，可以参考[这个]()。
 
 ### 对现有问题的改进
+
 总而言之，这个新的 C++14 特性可以解决一些问题，例如 仅可移动类型 或 允许一些额外的优化。
 
 #### Move 移动
@@ -282,6 +288,7 @@ pointer in lambda: 0x1413c20
 但是当你调用这个 Lambda 时，你会看见一个合法的内存地址。
 
 #### `std::function` 中的陷阱
+
 在lambda中拥有一个仅可移动的捕获变量会让闭包对象变得不能被拷贝。
 
 当你想在 `std::function` 中存储一个 Lambda，而这个 Lambda 接受仅可拷贝的可调用对象的时候，就会出现问题。
@@ -302,6 +309,7 @@ std::function<void()> fn = [ptr = std::move(p)](){}; //不可编译
 如果您想要完整的细节，您还可以查看草案([P0288]())中的 any_invokable ，这是 `std::function` 未来可能的改进，并且还会处理仅可移动类型。
 
 #### 优化 Optimisation
+
 有一个将捕获初始化器作为潜在的性能优化的点子：我们可以在初始化器中计算一次，而不是每次调用 Lambda 时都计算某个值：
 
 > 代码3-8 [给 Lambda 创建一个 `string`](https://wandbox.org/permlink/GWcJNoUsBFnscOp3)
@@ -342,6 +350,7 @@ int main() {
 该示例还使用了 `std::string_literals` ，这就是为什么我们可以编写代表 `std::string` 对象的 `"foo"s`。
 
 #### 捕获成员变量
+
 初始化器也被用来捕获成员变量。我们可以捕获一个成员变量的拷贝并且不用担心悬空引用。
 
 看个例子吧：
@@ -379,6 +388,7 @@ int main() {
 在这里我们在lambda中使用了一个很“奇怪”的语法 `[ s = s ]` ，这段代码能够工作的原因是捕获到的变量是在闭包类型内部的，而非外部。所以这里就没有歧义冲突了。
 
 ## 4. 泛型 Lambda
+
 这是 C++14 中有关 Lambda 的最大的更新！
 
 Lambda 的早期规范允许我们创建匿名函数对象并将它们传递给标准库中的各种泛型算法。
@@ -424,6 +434,7 @@ struct{
 ```
 
 ### 可变泛型参数
+
 但是这并不是全部，如果你需要更更多的函数参数类型，你可以自己进行可变性改造。
 
 看这个栗子：
@@ -466,6 +477,7 @@ struct __anoymousLambda{
 有关更多信息，请参阅 C++17 对可变参数泛型 Lambdas 的更新以及 C++20 中关于 [模板 Lambda]() 的信息
 
 ### 使用泛型 Lambda 进行完美转发
+
 使用泛型 Lambda 表达式，其实并不限定在只使用 `auto x`，您可以像其他 `auto` 变量一样添加任何限定符，如 `auto&` 、`const auto&` 或 `auto&&` 。
 
 有一个十分便利的点是，你可以指定 `auto&& x` 使其成为转发（泛型）引用。 这使您可以完美地转发输入参数：
@@ -523,6 +535,7 @@ void callFooFunc(T&& str) {
 但是，这还不是全部。
 
 ### 减少一些隐蔽的类型纠正
+
 泛型 Lambda 在发现类型推断有问题时，很有帮助。
 
 来看个例子：
@@ -614,9 +627,12 @@ int main() {
 > 在 C++20 中，开发者可以更好地控制 Lambda 的模板参数，因为 C++20 的新修订引入了模板 Lambda、概念和受约束的 `auto` 参数。
 
 ## 5. 使用 Lambda 代替 `std::bind1st` 和 `std::bind2nd`
+
 在C++98/03章节，我提到并展示了一些辅助函数，像 `std::bind1st` 和 `std::bind2nd` 之类。然而，这些函数在 C++11 中逐渐废弃，在 C++17 中，这些函数已被完全移除。
 
-像 `bind1st()` / `bind2nd()` / `mem_fun()`等函数，都是在 C++98 时期被引入进标注库的，而现在这些函数已不再需要了，因为我们可以使用 Lambda 或者更现代化的 C++ 技巧来代替。当然了，这些函数也没有获得对于完美转发、泛型模板、 `decltype` 以及其他 C++11 特性的更新，所以，我建议不要在现代编程中使用这些已弃用的内容。
+像 `bind1st()` / `bind2nd()` / `mem_fun()`等函数，都是在 C++98 时期被引入进标注库的，而现在这些函数已不再需要了，因为我们可以使用 Lambda 或者更现代化的 C++ 技巧来代替。
+
+当然了，这些函数也没有获得对于完美转发、泛型模板、 `decltype` 以及其他 C++11 特性的更新，所以，我建议不要在现代编程中使用这些已弃用的内容。
 
 下面是已被废弃的函数列表：
 
@@ -648,6 +664,7 @@ std::cout << onePlus(10) << ", " << minusOne(10) << '\n';
 
 上面的语法可能会十分的麻烦，我们下面来看看如何用现代化 C++ 技术来优化他们。
 ### 使用现代 C++ 技术
+
 我们首先用 `std::bind()` 来替换 `bind1st` 和 `bind2nd`
 
 > 代码3-15 [用 `std::bind` 来代替](https://godbolt.org/z/bj9Txh)
@@ -691,6 +708,7 @@ std::cout << lamOnePlus1(10) << ", " << lamMinusOne1(10) << '\n';
 
 很显然，Lambda 版本更简洁，更易读。 这一点将在后面更复杂的示例中更加凸显出来。
 ### 函数组合
+
 最后一个例子，我们来看看这个，在表达式中嵌套使用函数组合：
 
 > 代码3-16 [`std::bind` 中使用函数组合](https://godbolt.org/z/8N7ZBX)
@@ -729,7 +747,10 @@ const auto more2less6 = std::count_if(v.begin(), v.end(), [](int x) {
 > 有一些关于 `std::bind` 和 Lambda 的第三方指导性意见：比如《 Effective Modern C++ 》中的第 34 项条款，比如 Google Abseil Blog 中的[Avoid std::bind](https://abseil.io/tips/108)
 
 ## 6. Lambda 提升（LIFTing with Lambda）
-尽管标准库中提供的常用算法已经很方便的，但是仍然有一些情况不太好解决。比如，向模板函数中传递有重载的函数作为可调用对象。
+
+尽管标准库中提供的常用算法已经很方便的，但是仍然有一些情况不太好解决。
+
+比如，向模板函数中传递有重载的函数作为可调用对象。
 
 > 代码3-17 调用重载函数
 
@@ -825,6 +846,7 @@ Lambda 提升（LIFT）通过宏定义的方式实现，不然每次需要使用
 有兴趣的话，可以看看使用 Lambda 提升后的[最终代码](https://wandbox.org/permlink/r81jASiPPmYXTOmx)。
 
 ## 7. 递归 Lambda
+
 如果你有一个常规函数，那么递归调用这函数十分容易的。比如，我们计算阶乘时候的递归函数应该是这样的：
 
 > 代码3-19 [常规函数的递归调用](https://wandbox.org/permlink/BKwwFt2eW7Nd3gIV)
@@ -879,6 +901,7 @@ auto factorial = fact{};
 - 使用内部 Lambda 然后传递泛型参数
 
 ### 利用 `std::function`
+
 将 Lambda 表达式赋值给一个 `std::function`，后续捕获该这个对象到 Lambda 函数体内，实现递归。
 
 > 代码3-21 [使用 `std::function` 实现 Lambda 递归](https://wandbox.org/permlink/ogZxy9CvAvRBUfJL)
@@ -902,6 +925,7 @@ int main() {
 但是，但是，下面这种方式会更好。
 
 ### 内部 Lambda 和泛型参数
+
 来看看C++14中的用法：
 
 > 代码3-22 [使用内部 Lambda 来实现 Lambda 递归](https://wandbox.org/permlink/B0ueQ9nbZmr8PQE3)
@@ -924,12 +948,14 @@ int main() {
 
 多亏了 C++14 中的泛型 Lambda，我们可以避免 `std::function` 的开销并依赖 `auto` 进行类型推导。
 ### 更多技巧
+
 可以参阅下面两个链接来学习更多关于lambda递归的技巧：
 
 - [Recursive lambda functions in C++11](https://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11)
 - [Recursive lambdas in C++(14) - Pedro Melendez](http://pedromelendez.com/blog/2015/07/16/recursive-lambdas-in-c14/)
 
 ### 使用递归 Lambda 是最好的选择吗？
+
 在本节中，我们学到了一些有关 Lambda 表达式的技巧。
 
 尽管如此，这些技巧实现起来的复杂性远远高于仅使用常规递归函数调用的简单解决方案。
@@ -937,7 +963,9 @@ int main() {
 这就是为什么在某些情况下递归 Lambda 不是最好和最直接的选择。
 
 另一方面，复杂递归 Lambda 的优点是它的局部性和采用 `auto` 参数的能力。
+
 ## 8. 总结
+
 在本章， C++14 为 Lambda 表达式带来了几个关键性的改进。
 
 由于 C++14 可以在 Lambda 范围内声明新的变量，开发者可以在模板代码中更高效的使用 Lambda 。

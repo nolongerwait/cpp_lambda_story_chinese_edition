@@ -1,4 +1,5 @@
 # 四、Lambda in C++17
+
 C++17 为 Lambda 表达式添加了两个重要的增强特性：
 
 - `constexpr` Lambdas
@@ -38,6 +39,7 @@ lambda introducer with an optional capture list
 你可以在下一节中了解到更多的变更。
 
 ## 2. 类型系统中的异常规范
+
 在我们了解关于 Lambda 的语法改进之前，我们需要引入一个 C++17 的通用语言特性。
 
 函数的异常规范过去不属于函数类型的一部分，但是在 C++17 中被纳入其中，这意味着你可以有两种函数类型，一种有 `noexcept` ，另一种没有。
@@ -164,6 +166,7 @@ static_assert(Square(2) == 4);
 由于 `Square` 函数体非常简单并且它没有违反 `constexpr` 所需的相关规则，所以它被隐式声明为 `constexpr` 并且我们可以使用 `static_assert` 在编译期调用它 。
 
 ### 用例
+
 有没有更实用的代码例子？
 
 我们先实现一个常用的累加算法：
@@ -219,6 +222,7 @@ int main() {
 在这个例子中，我们将 `factorial` 声明为 `constexpr` ，这将会允许使用编译期进行检查的 `static_assert` 。
 
 ### 捕获变量
+
 你可以捕获变量（需要保证捕获后仍然是个常量表达式）：
 
 > 代码 4-5 [捕获常量](https://wandbox.org/permlink/Uy9MoYl0OnqZgUv2)
@@ -289,6 +293,7 @@ auto f = [x] {
 因此编译器需要在闭包中存储 `x` 的拷贝，也就是说需要捕获它，这个捕获操作并不能被优化掉。
 
 ### `constexpr` 总结
+
 简而言之：
 
 `constexpr` 允许你进行模板编程并且可能使用更短的代码。
@@ -298,7 +303,9 @@ auto f = [x] {
 > 届时，运行时的代码和编译期运行的代码将会非常相似。
 
 现在让我们现在了解自 C++17 引入的第二个重要的特性。
+
 ## 4. 捕获 `*this`
+
 还记得我们之前是如何[捕获类的成员变量](../Chapter2/README.md#捕获类成员和-this-指针)的吗？
 
 默认情况下，我们捕获 `this` （作为一个指针），并且当临时创建的对象的生命周期短于 Lamdba 函数的生命周期时，将会出现错误。
@@ -336,6 +343,7 @@ int main() {
 - 可以查看 [P0806](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0806r2.html) 获取更多资料。
 
 ### 一些指导性意见
+
 所以我们应该捕获 `[this]` 还是 `[*this]` 呢？ 以及，这为什么那么重要？
 
 在大多数情况下，当你在类的范围内里面使用 Lamdba 时，使用 `[this]` 或者 `[&]` 是很好的方式，当你的对象很大的时候不会产生额外的拷贝从而影响性能。
@@ -347,6 +355,7 @@ int main() {
 此外，在异步/多线程执行模式下，Lamdba 表达式的生命周期可能比对象的生命周期更长，因此捕获的 `this` 指针可能会失效。
 
 ## 5. IIFE 更新
+
 在 C++11 ，引入了 [IIFE - 立即调用函数表达式](../Chapter2/README.md#7-IIFE---立即调用函数表达式) ，在 C++17，有一些关于 IIFE 的更新。
 
 在使用 IIFE 过程中会遇到的一个问题时，IIFE 式的代码不易阅读。因为调用操作符 `()` 很容易被人忽略，下面是一个 IIFE 的例子：
@@ -484,6 +493,7 @@ int main() {
 ```
 
 ## 7. 从多个 Lambda 派生
+
 在 C++11 章节，我们了解了从 Lamdba 表达式进行派生，虽然这很有趣，但是使用场景很有限。
 
 主要的问题是在 C++11 中只支持特定数量的 Lambda，那么例子使用了一个或两个基类，但是如何能够使用可变数量的基类，即可变数量的 Lamdba 表达式。
@@ -548,7 +558,9 @@ int main() {
 在 C++17 我们获得了支持可变参数模板的语法，这在先前的版本中是没有的。
 
 现在让我们试着去理解剩下的两个特性：
+
 ### 自定义模板参数推导规则
+
 我们从 Lambda 派生，并且将它们的 `operator()` 暴露出来，上一节看到的那样。
 
 那么我们如何创建这种重载类型的变量呢？
@@ -609,7 +621,9 @@ overloaded myOverload { [](int) { }, [](double) { } };
 你可以在 [C++20 章节]() 中看到新的标准，类模板参数推导将被提升，对于重载模式，将不再需要写自定义的推导规则。
 
 现在让我们进入最后一个小节 - 聚合初始化
+
 ### 聚合初始化的扩展
+
 这个功能相对简单：我们可以聚合初始化一个从其它类型派生的类型。
 
 来自这个标准 [[dcl.init.aggr]](https://timsong-cpp.github.io/cppwp/n4659/dcl.init.aggr)：
@@ -674,6 +688,7 @@ struct overloaded : Fs... {
 至此为止，我们介绍了很多，那么有没有什么有用的重载模式的例子？
 
 现在看来似乎 `std::variant` 更为方便。
+
 ### `std::variant` 和 `std::visit` 的例子
 
 我们可以使用继承和重载模式来做一些更实用的事情。
@@ -724,6 +739,7 @@ int main() {
 其中，我们有一个 `std::visit` 的调用，它创建了一个 `visitor` ，重载了三种类型，三个函数都是将当前值赋值一份，只是类型不同。
 
 ## 8. 使用 Lambda 进行并发编程
+
 如果在同一个线程中调用 Lamdba 是比较容易的情形。
 
 但是如果你想在一个单独的线程中调用 Lamdba 的话，应该怎么做？
@@ -879,7 +895,9 @@ int main() {
 它可以与线程声明在一起，并且可以做任何你在常规函数和仿函数中能够做的事情。
 
 现在让我们来尝试一下在 C++ 中新引入的另外一个科技。
+
 ### Lambda 和 `std::async`
+
 您可以使用多线程的第二种方法是通过 `std::async`。
 
 我们在 C++11 中通常将这个功能与线程一起使用。
@@ -958,6 +976,7 @@ auto vec = iotaFuture.get();  // make sure we get the results...// ...
 - [Core C++ 2019 :: Avi Kivity :: Building efficient I/O intensive applications with Seastar](https://www.youtube.com/watch?v=p8d28t4qCTY)
 
 ### Lambda 和 C++17 的并行算法
+
 在讨论了 C++11 的线程支持后，我们可以转向更新的标准：C++17。
 
 这次有一个超级好用的技巧，允许您并行化标准库中的大多数算法。
@@ -1045,11 +1064,13 @@ int main() {
 - [The Amazing Performance of C++17 Parallel Algorithms, is it Possible?](https://www.cppstories.com/2018/11/parallel-alg-perf/)
 
 ### Lambda 和异步 - 总结
+
 当你想启动一个线程、通过 `std::async` 或者调用并行算法的时候，使用 Lamdba 表达式会非常方便。
 
 但是必须要记住的一点是，闭包对象在并发性方面并没有特殊性，所有的挑战和困难也都是基于此。
 
 ## 9. 总结
+
 在本章节中，您已经看到了 C++17 加入了 C++ 中的两个基本元素， `constexpr` 和 Lamdba。
 
 现在你可以配合 `constexpr` 使用 Lamdba 表达式了。

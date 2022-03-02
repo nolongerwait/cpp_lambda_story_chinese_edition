@@ -1,5 +1,8 @@
 # 五、Lambda in C++20
-2020 年 2 月，在捷克首都布拉格的会议上，ISO 委员会最终通过 C++20 标准，并宣布其将于 2020 年末正式发布。新的标准规范为 C++ 语言本身和标准库都带来了诸多显著性的提升和改进！ Lambda 表达式也得到了一些更新。
+
+2020 年 2 月，在捷克首都布拉格的会议上，ISO 委员会最终通过 C++20 标准，并宣布其将于 2020 年末正式发布。
+
+新的标准规范为 C++ 语言本身和标准库都带来了诸多显著性的提升和改进！ Lambda 表达式也得到了一些更新。
 
 本章中，主要关注下列内容：
 
@@ -12,6 +15,7 @@
 
 你可以在 [N4681](https://timsong-cpp.github.io/cppwp/n4861/) 中的 [[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4861/expr.prim.lambda) 章节查阅标准规范中 Lambda 相关的内容。
 ## 1. Lambda 语法更新
+
 在 C++20 中，Lambda 的语法得到了改进：
 
 - 现在可以在参数列表后添加 `consteval` 关键字
@@ -34,6 +38,7 @@ lambda introducer with an optional capture list
 ```
 
 ## 2. 更新快览
+
 C++20 中 Lambda 表达式的相关特性：
 
 - 允许 `[=, this]` 作为 Lambda 捕获 - [P0409R2](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0409r2.html) 并且弃用了通过 `[=]` 隐式捕获 `this` - [P0806](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0806r2.html)
@@ -98,7 +103,9 @@ warning: implicit capture of 'this' via '[=]' is deprecated in C++20
 为什么会出现这条警告呢？因为就算是使用 `[=]` 捕获的 `this` 也是作为指针的形式出现，所以不如显式的指明它更好：`[=, this]` 或者 `[=, *this]` 。
 
 快速回顾之后，让我们来看看 C++20 中与 Lambda 相关的更突出的特性。
+
 ## 3. consteval Lambda
+
 从 C++11 起， `constexpr` 就允许函数在编译期间执行了，但是同时，也可以在运行时执行这些函数。在某些情况下，最好的做法是将部分功能限制在编译期时进行。
 
 这就是为什么 C++20 中引入了新的关键字，来创建符合 `constexpr` 规则但只能在编译期执行的函数，这些函数也被称为 **“即时函数（Immediate Function）”**。
@@ -126,6 +133,7 @@ int main() {
 当然，这两个关键字无法同时使用。在草案 [P1073R3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1073r3.html) 中你可以找到与此相关的全部描述。
 
 ## 4. 捕获参数包
+
 C++20 中还对 Lambda 中初始化捕获的包扩展带来了一个提升：
 
 ```cpp
@@ -176,7 +184,9 @@ int main() {
 在示例中，我们使用了一个 `printer` 对象，它很类似在 C++17 中写过的那样，但是在这儿我们用来捕获变量而不是作为转发 Lambda 参数使用。
 
 代码中甚至传递了一个 `unique` 指针。我们传递了两次并且你可以看到在第二次调用时得到的结果为 `0` ，因为此时指针已经丢失了它对那块内存块的所有权。
+
 ## 5. 模板 Lambda
+
 C++14 中就已经引入了泛型 Lambda，并且可以在模板中将参数类型也声明为 `auto` 类型。
 
 例如：
@@ -232,9 +242,11 @@ auto foo = []<typename T>(std::vector<T> const& vec) {
 <typename T>
 void operator()(std::vector<T> const& s) { ... }
 ```
+
 这样模板参数就在捕获子句 `[]` 之后了。
 
 现在进行类似 `foo(10)` 的调用，那么会收到一个较人性化的消息：
+
 ```plaintext
 note:   mismatched types 'const std::vector<T>'and 'int'
 ```
@@ -302,7 +314,9 @@ auto ForwardToTestFunc = []<typename... T>(T && ... args) {
 怎么样？模板 Lambda 提供了更为清晰的语法和更好的访问参数类型的途径。
 
 当然，这还不够，你甚至也可以在 Lambda使用 `concept` ，咱们接着往下看。
+
 ## 6. Concept 和 Lambda
+
 `concept` 是编写模板的一项革命性进步。
 
 它将允许你对模板参数进行约束，这可以极大提高代码的可读性，可能提升编译速度甚至能够提供更友善的错误信息。
@@ -423,7 +437,9 @@ int main() {
 ```
 
 这个例子中 `RenderCaller` 就是一个泛型 `Lambda` ，并且支持类型必须满足 `IRenderable concept`。
+
 ## 7. 无状态 Lambda 的变更
+
 也许你会想起来 C++11 中我们提过的无状态、甚至没有默认构造化的 Lambda。
 
 然而，这个限制在 C++20 中被解除了。
@@ -510,6 +526,7 @@ std::map<int, int, decltype([](int x, int y) { return x >y; })> map;
 更多的内容可以参考 [P0315R2](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0315r2.pdf) 。
 
 ## 8. Lambda 和 `constexpr` 算法
+
 回想一下之前章节中的内容，自 C++17 依赖，我们可以使用 `constexpr` Lambda。
 
 并且，由于这项功能，我们可以传递 Lambda 给一个需要在编译器评估的函数。
@@ -558,6 +575,7 @@ int main() {
 > 具体的内容可以查阅 [P0202](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0202r3.html) ， [P0879](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0879r0.html) 和 [P1645](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1645r1.html) 。
 
 ## 9. C++20 对重载模式的更新
+
 在前一章中，学习过如何从多个 Lambda 表达式派生并通过重载模式暴露它们。
 
 这种技术对于 `std::variant` 访问很方便。
@@ -596,6 +614,7 @@ template<class... Ts> struct overload: Ts... { using Ts:: operator()...; };
 > GCC10 似乎实现了这个提议，但是它不适用于继承的高级案例。因此我们需要等待 GCC 对该特性进行完整的支持。
 
 ## 10. 总结
+
 在本章中，我们回顾了 C++20 带来的变化。
 
 首先，一些澄清和改进：例如捕获 `this` 、捕获结构化绑定或默认构造无状态 Lambda 的能力。
