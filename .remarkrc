@@ -1,37 +1,17 @@
 {
     "settings": {},
     "plugins": [
-        "remark-copywriting-correct",
         "remark-preset-lint-markdown-style-guide",
         [
             "remark-lint-list-item-spacing",
             false
         ],
         [
-            "remark-lint-list-item-indent",
-            false
-        ],
-        [
-            "remark-lint-code-block-style",
-            false
-        ],
-        [
             "remark-lint-maximum-line-length",
             false
         ],
-        [
-            "remark-lint-ordered-list-marker-value",
-            "ordered"
-        ],
-        [
-            "remark-lint-no-consecutive-blank-lines",
-            false
-        ],
-        "remark-details",
-        "remark-math",
-        "remark-math-space",
+        "remark-copywriting-correct",
         "remark-lint-final-newline",
-        "remark-lint-no-tabs",
-        "remark-footnotes"
+        "remark-lint-no-tabs"
     ]
 }

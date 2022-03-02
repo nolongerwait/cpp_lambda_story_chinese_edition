@@ -104,7 +104,7 @@ auto myLambda = [](int a)[[nodiscard]]{ return a * a; };
 
 使用 [Clang](https://wandbox.org/permlink/3zfzL1NNpPXXgLOx) 编译，就会产生如下的编译错误：
 
-```bash
+```plaintext
 error: 'nodiscard' attribute cannot be applied to types
 ```
 
@@ -234,7 +234,7 @@ int main() {
 
 用 GCC 编译并运行，将会输出：
 
-```bash
+```plaintext
 sizeof(myLambda) is 1
 sizeof(myFunc) is 32
 ```
@@ -259,7 +259,7 @@ auto foo = [&x, &y]() { ++x; ++y; };
 decltype(foo) fooCopy
 ```
 GCC 会提示如下错误：
-```bash
+```plaintext
 error: use of deleted function'main()::<lambda()>::<lambda>()'
        decltype(foo) fooCopy;
                   ^~~~~~~
@@ -537,7 +537,7 @@ int main() {
 
 输出：
 
-```bash
+```plaintext
 in main(): 1 1
 in foo(): 2 2
 in main(): 1 1
@@ -644,7 +644,7 @@ int main() {
 
 这是因为，只有在自动存储期间的变量会被捕获。GCC甚至会对此提出警告：
 
-```bash
+```plaintext
 warning: capture of variable 'global' with non-automatic storage duration.
 ```
 
@@ -652,7 +652,7 @@ warning: capture of variable 'global' with non-automatic storage duration.
 
 在Clang中甚至会直接提示错误：
 
-```bash
+```plaintext
 error: 'global' cannot be captured because it does not have
         automatic storage duration
 
@@ -694,7 +694,7 @@ int main() {
 
 输出：
 
-```bash
+```plaintext
 10
 11
 12
@@ -727,7 +727,7 @@ int main() {
 
 这段代码尝试去捕获一个成员变量，但是编译器并不同意，这会导致编译器编译错误：
 
-```bash
+```plaintext
 In member function 'void Baz::foo()':
 error: capture of non-variable 'Baz::s'
 error: 'this' was not captured for this lambda function
@@ -885,7 +885,7 @@ int main() {
 
 运行这段代码，结果为：
 
-```bash
+```plaintext
 tuple size: 4
 tuple 1st:  1
 tuple size: 2
@@ -927,7 +927,6 @@ int main() {
 
 上面的例子中，有两个返回语句，但是他们都指向 `double` 类型，所以编译器能够推断出最终的类型。
 在 C++14 中，推导常规函数时，lambda的类型会自动更新以适应 `auto` 类型的规则。
-
 
 ### 尾部返回类型语法
 如果你想显式的凸显返回类型，那么可以使用尾部返回类型的语法。举个例子：
@@ -1119,7 +1118,7 @@ int main() {
 
 然而，你也可以直接立即调用一个lambda：
 
-> 代码2-23 [“现写现用” Lambda ](https://wandbox.org/permlink/fsFOxzBZuFS7bMVn)
+> 代码2-23 [“现写现用” Lambda](https://wandbox.org/permlink/fsFOxzBZuFS7bMVn)
 
 ```cpp
 #include <iostream>
@@ -1138,7 +1137,7 @@ int main() {
 
 上面这个例子， Lambda 在被创建之后没有赋给任何一个闭包对象，而是直接被调用（通过“ `()` ”操作符）。如果你运行上述程序，期望结果应该是输出了：
 
-```bash
+```plaintext
 2, 2
 ```
 
@@ -1294,7 +1293,6 @@ int main() {
 }
 ```
 
-
 这次我们有更多的代码：我们从两个模板参数派生，但我们还需要显式地公开它们的调用运算符。
 
 这是为什么呢？ 这是因为在寻找正确的函数重载时，编译器要求候选对象在同一范围内。
@@ -1329,7 +1327,7 @@ int main() {
 
 [GCC](https://wandbox.org/permlink/fFRqVGUisdQh1qGV) 编译便会报出错误：
 
-```bash
+```plaintext
 error:request formember 'Func' is ambiguous
 ```
 
@@ -1428,7 +1426,7 @@ int main() {
 
 输出：
 
-```bash
+```plaintext
 HELLO AMAZING MODERN C++ WORLD!
 removed spaces: 12
 ```

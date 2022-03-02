@@ -8,7 +8,7 @@
 ## 读者反馈
 如果您发现错误、拼写错误、语法错误……或其他任何需要更正的（特别是逻辑问题！），请将您的反馈发送到 bartlomiej.filipek@bfilipek.com。
 您也可以使用这个地方：
-- [Leanpub Book的反馈页面 - C++ Lambda Story](https://leanpub.com/cpplambda)  
+- [Leanpub Book的反馈页面 - C++ Lambda Story](https://leanpub.com/cpplambda)
 更重要的是，这本书在 *GoodReads* 上有一个专门的页面。 请在那里分享您的见解：
 - [C++ Lambda Story @GoodReads](https://www.goodreads.com/book/show/53609731-c-lambda-story)
 ## 代码证书
@@ -54,7 +54,7 @@ Tomek 在我们位于克拉科夫的 Local C++ 用户组中主持了关于 Lambd
 - 2019 年 03 月 25 日 - 第一版上线！
 - 2020 年 01 月 05 日 - 语法、更好的例子、措辞、IIFE 部分、C++20 更新。
 - 2020 年 04 月 17 日 - C++20 章节重写、语法、措辞、布局。
-- 2020 年 04 月 30 日 - 从 C++11、C++17 和 C++20中的 lambda 派生 
+- 2020 年 04 月 30 日 - 从 C++11、C++17 和 C++20中的 lambda 派生
 - 2020 年 06 月 19 日- 主要更新：
   - 改进了 C++03 章节，添加了有关标准库中的辅助函数对象的部分。
   - 添加了有关如何操作的新部分从 C++14 章节中不推荐使用的 bind1stin 转换为现代替代方案。
@@ -96,7 +96,7 @@ void PrintFunc(int x) {
     std::cout << x <<std::endl;
 }
 
-int main() {    
+int main() {
     std::vector<int> v;
     v.push_back(1);
     v.push_back(2);
@@ -118,7 +118,7 @@ struct PrintFunctor {
     }
 }
 
-int main() {    
+int main() {
     std::vector<int> v;
     v.push_back(1);
     v.push_back(2);
@@ -136,16 +136,16 @@ int main() {
 
 struct PrintFunctor {
     PrintFunctor(): numCalls(0){}
-    
+
     void operator()(int x) const {
         std::cout << x <<std::endl;
         ++numCalls;
     }
-    
+
     mutable int numCalls;
 };
 
-int main() {    
+int main() {
     std::vector<int> v;
     v.push_back(1);
     v.push_back(2);
@@ -156,7 +156,7 @@ int main() {
 在上面的例子中，我们使用了成员变量 `numCalls` 来统计调用操作符被调用的次数。由于调用操作符是一个 `const` 成员函数，我使用了 `mutable` 类型的变量。
 
 如您所料，我们得到的输出结果就是：
-```bash
+```plaintext
 1
 2
 num calls: 2
@@ -190,7 +190,7 @@ int main() {
 }
 ```
 在这个版本中， `PrintFunctor` 使用了一个额外的参数来初始化成员变量。然后这个变量在调用操作符中被使用。所以最终期望的输出是：
-```bash
+```plaintext
 Elem: 1
 Elem: 2
 num calls: 2
@@ -216,7 +216,7 @@ int main() {
 }
 ```
 您可以用 GCC 来尝试编译它（带上 C++98 的标签 `-std=c++98` ），当然不出意外，将会出现如下的编译错误：
-```bash
+```plaintext
 error: template argument for
 'template<class _IIter, class _Funct> _Funct
 std::for_each(_IIter, _IIter, _Funct)'
@@ -653,7 +653,7 @@ public:
     void operator()() {
         ++x;
     }
-    
+
 private:
     int x;
 };
@@ -728,7 +728,7 @@ int main() {
 
     std::cout << "number of comparisons: " << compCounter << '\n';
 
-    for (const auto& v : vec) 
+    for (const auto& v : vec)
         std::cout << v << ", ";
 }
 
@@ -1068,7 +1068,7 @@ int main() {
         return (*(int*)b - *(int*)a);
     });
 
-    for (const auto& val : values) 
+    for (const auto& val : values)
         std::cout << val << ", ";
 }
 
@@ -1090,28 +1090,28 @@ int main() {
 
 int main()
 {
-      
+
   class __lambda_4_18
   {
-    public: 
+    public:
     inline void operator()() const
     {
     }
-    
+
     using retType_4_18 = auto (*)() -> void;
     inline operator retType_4_18 () const noexcept
     {
       return __invoke;
     }
-    
-    private: 
+
+    private:
     static inline void __invoke()
     {
     }
-    
-    
+
+
   } __lambda_4_18{};
-  
+
   using FuncPtr_4 = void (*)();
   FuncPtr_4 funcPtr = +static_cast<void (*)()>(__lambda_4_18.operator __lambda_4_18::retType_4_18());
   /* PASSED: static_assert(std::integral_constant<bool, 1>::value); */
@@ -1308,7 +1308,7 @@ error:request formember 'Func' is ambiguous
 
 好吧，让我们回到我们的更上面那个例子：SimpleOverloaded 是一个基本类，它不是生产就绪的。
 
-看看 C+ +17 章，我们将讨论此模式的高级版本。 
+看看 C+ +17 章，我们将讨论此模式的高级版本。
 
 多亏了 C++17 的几个特性，我们将能够从多个 Lambda 继承（感谢可变参数模板）并利用更多的紧凑语法！
 ## 9. 在容器中存储lambda
@@ -1316,7 +1316,7 @@ error:request formember 'Func' is ambiguous
 
 但是我不是写过不能默认创建和分配 lambdas 吗？
 
-是的……但是我们可以在这里做一些技巧。 
+是的……但是我们可以在这里做一些技巧。
 
 技术之一是利用转换为函数指针的无状态 lambda 的属性。 虽然您不能直接存储闭包对象，但您可以保存从 lambda 表达式转换而来的函数指针。
 
@@ -1352,35 +1352,35 @@ int main() {
 
 int main() {
     std::vector<std::function<std::string(const std::string&)>> vecFilters;
-    
+
     size_t removedSpaceCounter = 0;
-    const auto removeSpacesCnt = [&removedSpaceCounter](const std::string& str) { 
+    const auto removeSpacesCnt = [&removedSpaceCounter](const std::string& str) {
         std::string tmp;
         std::copy_if(str.begin(), str.end(), std::back_inserter(tmp), [](char ch) {return !isspace(ch); });
         removedSpaceCounter += str.length() - tmp.length();
         return tmp;
     };
-    
+
     const auto makeUpperCase = [](const std::string& str) {
         std::string tmp = str;
         std::transform(tmp.begin(), tmp.end(), tmp.begin(),
                [](unsigned char c){ return std::toupper(c); });
         return tmp;
     };
-    
+
     vecFilters.emplace_back(removeSpacesCnt);
     vecFilters.emplace_back([](const std::string& x) { return x + " Amazing"; });
     vecFilters.emplace_back([](const std::string& x) { return x + " Modern"; });
     vecFilters.emplace_back([](const std::string& x) { return x + " C++"; });
     vecFilters.emplace_back([](const std::string& x) { return x + " World!"; });
     vecFilters.emplace_back(makeUpperCase);
-    
+
     const std::string str = "   H e l l o     ";
     auto temp = str;
-    for (const auto &entryFunc : vecFilters)  
+    for (const auto &entryFunc : vecFilters)
         temp = entryFunc(temp);
     std::cout << temp;
-    
+
     std::cout <<"\nremoved spaces: " << removedSpaceCounter << '\n';
 }
 
@@ -1441,9 +1441,9 @@ auto myFunction() {
 
 如果在lambda中有多条返回语句，他们必须能够推断出同样的类型：
 auto foo = [](int x){
-    if (x < 0) 
+    if (x < 0)
         return x * 1.1f
-    else 
+    else
         return x * 2.1
 }
 
@@ -1505,7 +1505,7 @@ int main() {
     const auto foo = [z = x + y]() {
         std::cout << z << '\n';
     };
-    
+
     x = 0;
     y = 0;
     foo();
@@ -1522,7 +1522,7 @@ struct _unnamedLambda {
     void operator()() const{
         std::cout << z << '\n';
     }
-    
+
     int z;
 } someInstance;
 
@@ -1642,7 +1642,7 @@ struct Baz {
             std::cout << s << std::endl;
         };
     }
-    
+
     std::string s;
 };
 
@@ -1783,7 +1783,7 @@ int main() {
 很明显，这里是有问题的。std::map的类型应该是std::pair<const key, T>而不是const std::pair<Key, T>。而在我们的代码中，会造成不必要的额外拷贝，在std::pair<const std::string, int>和const std::pair<std::string, int>&(其中const std::string 对 std::string 的转换)之间。
 
 修复一下代码，它本应该是这样的：
-std::for_each(std::begin(numbers), std::end(numbers), 
+std::for_each(std::begin(numbers), std::end(numbers),
     [](const auto& entry) {
         std::cout << entry.first << " = " << entry.second << '\n';
     });
@@ -1802,12 +1802,12 @@ int main() {
     // print addresses:
     for (auto mit = numbers.cbegin(); mit != numbers.cend(); ++mit)
         std::cout << &mit->first << ", " << &mit->second << '\n';
-        
+
     // each time entry is copied from pair<const string, int>!
     std::for_each(std::begin(numbers), std::end(numbers), [](const std::pair<std::string, int>& entry) {
         std::cout << &entry.first << ", " << &entry.second << ": " << entry.first << " = " << entry.second << '\n';
     });
-    
+
     // this time entries are not copied, they have the same addresses
     std::for_each(std::begin(numbers), std::end(numbers), [](const auto& entry) {
         std::cout << &entry.first << ", " << &entry.second << ": " << entry.first << " = " << entry.second << '\n';
@@ -1879,7 +1879,7 @@ auto lamMinusOne1 =[](int b) { return b - 1; };
 std::cout << lamOnePlus1(10) << ", " << lamMinusOne1(10) << '\n';
 
 当然，在C++14中我们也可以用初始化器来进一步优化lambda，让lambda更加灵活：
- 
+
 auto lamOnePlus1 =[a = 1](int b) { return a + b; };
 auto lamMinusOne1 =[a = 1](int b) { return b - a; };
 std::cout << lamOnePlus1(10) << ", " << lamMinusOne1(10) << '\n';
@@ -1896,7 +1896,7 @@ int main() {
     using std::placeholders::_1;
     const std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9};
     const auto val = std::count_if(v.begin(), v.end(),
-            std::bind(std::logical_and<bool>(), 
+            std::bind(std::logical_and<bool>(),
                 std::bind(std::greater<int>(), _1, 2),
                     std::bind(std::less<int>(), _1, 6)
                 )
@@ -1928,7 +1928,7 @@ int main() {
 
 这个例子里面 foo 分别有对于 int 和 float 的两个重载，并且作为可调用对象传递给了模板函数 for_each 。遗憾的是，在GCC9中，编译会提示如下错误：
 error: no matching function for call to
-for_each(std::vector<int>::iterator, std::vector<int>::iterator, 
+for_each(std::vector<int>::iterator, std::vector<int>::iterator,
  <unresolved overloaded function type>)
     std::for_each(vi.begin(), vi.end(), foo);
                                        ^^^^^
@@ -1942,7 +1942,7 @@ std::for_each(vi.begin(), vi.end(), [](auto x) { return foo(x); });
 
 当然，我们也可以使用完美转发来更加巧妙的规避掉重载的情况。
 std::for_each(vi.begin(), vi.end(), [](auto &&x) {
-    return foo(std::forward<decltype(x)>(x); 
+    return foo(std::forward<decltype(x)>(x);
 });
 
 下面是一个应用的例子：
@@ -1976,7 +1976,7 @@ int main() {
     }
 
 看着有点懵？别急，我们来一点点解析这段代码的功能。
-- 返回 foo(std::forward<decltype(x)>(x)...) 
+- 返回 foo(std::forward<decltype(x)>(x)...)
   - 完美转发，这样我们才能完整传递输入参数到foo函数中，并且保留类型。
 - noexcept(noexcept(foo(std::forward<decltype(x)>(x)...)))
   - 使用noexcept操作符（被嵌套的那一个）检查 可调用对象 foo 的异常规范。依赖于异常的检查结果，最终会产生 noexcept(true) 或者 noexcept(false) 。
@@ -2115,11 +2115,11 @@ int main() {
     SimpleNoexceptCall([]() noexcept { });
     // SimpleNoexceptCall(fRegular);   // cannot convert
     // SimpleNoexceptCall([]() { });  // cannot convert
-    
+
     SimpleCall(fNoexcept); // converts to regular function
     SimpleCall(fRegular);
     SimpleCall([]() noexcept { });  // converts
-    SimpleCall([]() { });   
+    SimpleCall([]() { });
 }
 
 
@@ -2148,7 +2148,7 @@ void CallWith10(Callable&& fn) {
 
 int main() {
     int x{10};
-    
+
     const auto lam = [&x](int y) noexcept {
         x += y;
     };
@@ -2173,7 +2173,7 @@ lamEx with x = 20
 动态异常规范在 C++11 中被弃用，在 C++17 中被删除，只能使用 noexcept 关键字去声明一个不会抛出异常的函数。
 
 Question：如果在一个具有 noexcept 声明的函数中抛出异常，会发生什么？
-Answer：编译期会调用 std::terminate。 
+Answer：编译期会调用 std::terminate。
 
 ## 3. constexpr Lambda 表达式
 从 C++11 开始，constexpr 关键字能够在编译期评估越来越多的代码。这不仅会影响到程序的性能，也让编译期的编码变得更加愉快和有力。
@@ -2238,7 +2238,7 @@ int main() {
         };
         return fact_impl(n, fact_impl);
     };
-    
+
     static_assert(factorial(5) == 120);
 }
 
@@ -2429,7 +2429,7 @@ int main() {
 }
 
 我们将得到如下输出：
-1, 2, 3, hello, 10.5, 
+1, 2, 3, hello, 10.5,
 
 代码其实可以更短：
 const auto printer = [](auto... args) {
@@ -2845,7 +2845,7 @@ Lambda 和 C++17 的并行算法
 auto myVec = GenerateVector();
 std::sort(std::execution::par, myVec.begin(), myVec.end());
 
-值得注意的是我们指定了第一个参数 std::execution::par。它将为排序算法开启并发执行的特性。 
+值得注意的是我们指定了第一个参数 std::execution::par。它将为排序算法开启并发执行的特性。
 
 我们还有其它的特性：
 特性名
@@ -3023,7 +3023,7 @@ int main() {
 ## 4. 捕获参数包
 C++20中还对lambda中初始化捕获的包扩展带来了一个提升：
 template<typename...Args>
-void call(Args&& ... args) { 
+void call(Args&& ... args) {
     auto ret = [...capturedArgs = std::move(args)](){};
 }
 
@@ -3061,7 +3061,7 @@ C++14中就已经引入了泛型lambda，并且可以在模板中将参数类型
 [] (auto x) { x; };
 
 编译器会生成一个调用操作符对应以下的模板方法：
-template <typename T> 
+template <typename T>
 void operator ()(T x) { x; }
 
 但是，这似乎没有办法去直接改变这个模板的参数，并且使用“真实”的模板参数。C++20下，这都是可能的。
@@ -3170,7 +3170,7 @@ void floatsOnly (std::floating_point auto fp) {}
 void myTemplateFunction (auto val) {}
 
 换句话说，对于lambda，我们可以利用它精炼的风格，例如对泛型lambda参数添加额外的限制。
-auto GenLambda = [](SignedIntegral auto param) { return param * param + 1; } 
+auto GenLambda = [](SignedIntegral auto param) { return param * param + 1; }
 
 上面的例子利用SignedIntegral来限制 auto 参数。但是整个表达式比起模板lambda看上去更加的可读，这就是为什么我们要着重讨论的点了。
 
@@ -3243,7 +3243,7 @@ int main() {
     };
     const std::set<Product, decltype(nameCmp)> prodSet{
             {"Cup", 10, 100.0}, {"Book", 2, 200.5}, {"TV set", 1, 2000}, {"Pencil", 4, 10.5}};
-    for (const auto& elem : prodSet) 
+    for (const auto& elem : prodSet)
         std::cout << elem._name << '\n';
 }
 
@@ -3286,11 +3286,11 @@ std::map<int, int, decltype([](int x, int y) { return x >y; })> map;
 回想一下之前章节中的内容，自C++17依赖，我们可以使用constexpr lambda。并且，由于这项功能，我们可以传递lambda给一个需要在编译器评估的函数。在C++20中大多数标注算法都可以被关键字 constexpr 标记，这使得constexpr lambda用起来更加方便了。
 
 看一些例子吧还是。
-代码5-12 在普通的 constexpr Lambda中使用 std::accumulate() 
+代码5-12 在普通的 constexpr Lambda中使用 std::accumulate()
 #include <array>
 #include <numeric>
 int main() {
-    constexpr std::array arr{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};  
+    constexpr std::array arr{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     // with constexpr lambda
     static_assert(std::accumulate(begin(arr), end(arr), 0, [](auto a, auto b) noexcept {
         return a + b;

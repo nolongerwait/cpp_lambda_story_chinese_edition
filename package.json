@@ -11,12 +11,8 @@
     "dependencies": {
         "remark-cli": "^10.0.1",
         "remark-copywriting-correct": "^0.5.0",
-        "remark-details": "^4.0.4",
-        "remark-footnotes": "^4.0.1",
         "remark-lint-final-newline": "^2.1.1",
         "remark-lint-no-tabs": "^3.1.1",
-        "remark-math": "^5.1.1",
-        "remark-math-space": "^3.0.0",
         "remark-preset-lint-markdown-style-guide": "^5.1.2"
     }
 }
