@@ -1,0 +1,18 @@
+{
+    "name": "cpp_lambda_story_chinese_edition",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "bash build.sh",
+        "serve": "bash serve.sh",
+        "lint": "remark ./Source/**/*.md --quiet --frail",
+        "format": "remark . --quiet --frail --output"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "remark-cli": "^10.0.1",
+        "remark-copywriting-correct": "^0.5.0",
+        "remark-lint-final-newline": "^2.1.1",
+        "remark-lint-no-tabs": "^3.1.1",
+        "remark-preset-lint-markdown-style-guide": "^5.1.2"
+    }
+}
