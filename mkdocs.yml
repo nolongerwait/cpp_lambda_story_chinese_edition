@@ -55,8 +55,8 @@ theme:
         icon: material/weather-sunny
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: cyan
+      scheme: dracula
+      primary: deep purple
       accent: deep purple
       toggle:
         icon: material/weather-night
@@ -74,23 +74,22 @@ theme:
 plugins:
   - search:
       lang: ja
-  - git-revision-date-localized
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
   - minify:
       minify_html: true
+  - mkdocs-material-extras:
 
 # Customization
 extra:
+  generator: false
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/nolongerwait/cpp_lambda_story_chinese_edition
-
-extra_css:
-
-extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
 
 # Extensions
 markdown_extensions:
@@ -106,7 +105,7 @@ markdown_extensions:
   - markdown.extensions.tables:
   - markdown.extensions.toc:
       slugify: !!python/name:pymdownx.slugs.uslugify
-      permalink: true
+      permalink: ""
       toc_depth: 3
   - pymdownx.arithmatex:
   - pymdownx.betterem:
@@ -138,11 +137,8 @@ markdown_extensions:
   - pymdownx.superfences:
       preserve_tabs: true
       custom_fences:
-        - name: diagram
-          class: diagram
-          format: !!python/name:pymdownx.superfences.fence_code_format
         - name: mermaid
-          class: mermaid-experimental
+          class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
         - name: math
           class: arithmatex
