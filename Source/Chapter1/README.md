@@ -2,18 +2,18 @@
 
 凡是在开始之前，对主题的背景做出一些介绍总是好的。
 
-所以，我们首先会聊一聊在没有现代C++之前的那些 C++ 代码。
+所以，我们首先会聊一聊在没有现代 C++ 之前的那些 C++ 代码。
 
 在本章，你可以学到：
 
-- 如何从标准库传递一个仿函数给算法
-- 仿函数和函数指针的局限性
-- 为什么辅助函数不够好使
-- C++0x / C++11 中添加新特性的动机
+* 如何从标准库传递一个仿函数给算法
+* 仿函数和函数指针的局限性
+* 为什么辅助函数不够好使
+* C++0x/C++11 中添加新特性的动机
 
 ## 1. C++98/03 中的可调用对象
 
-首先来聊聊标准库中基本思想之一的算法，像 `std::sort` ，`std::for_each` ，`std::transform` 等，可以调用任何可调用对象以及调用输入容器中的一个元素。
+首先来聊聊标准库中基本思想之一的算法，像 `std::sort`，`std::for_each`，`std::transform` 等，可以调用任何可调用对象以及调用输入容器中的一个元素。
 
 然而，在 C++98/03 中，这些操作只包含指向函数的指针或者仿函数。
 
@@ -21,7 +21,7 @@
 
 在第一版中，我们将使用规范的函数：
 
-> 代码1-1 [基础输出函数](https://wandbox.org/permlink/XiMBBTOG122vplUS)
+> 代码 1-1 [基础输出函数](https://wandbox.org/permlink/XiMBBTOG122vplUS)
 
 ```c++
 #include<algorithm>
@@ -40,11 +40,11 @@ int main() {
 }
 ```
 
-上面的代码使用了 `std::for_each` 来从 `vector` 中迭代每个元素（请注意此时的 C++ 为 98/03 版本，尚不支持范围式循环），同时传递了一个可调用对象 `PrintFunc` 。
+上面的代码使用了 `std::for_each` 来从 `vector` 中迭代每个元素（请注意此时的 C++ 为 98/03 版本，尚不支持范围式循环），同时传递了一个可调用对象 `PrintFunc`。
 
 我们可以将这个简单的函数转化为一个仿函数：
 
-> 代码1-2 [基础输出仿函数](https://wandbox.org/permlink/7OGJzJlfg40SSQUG)
+> 代码 1-2 [基础输出仿函数](https://wandbox.org/permlink/7OGJzJlfg40SSQUG)
 
 ```cpp
 #include<algorithm>
@@ -73,7 +73,7 @@ int main() {
 
 这需要在仿函数中存储一个计数器，并且在每次 lambda 调用时更新计数：
 
-> 代码1-3 [带有状态的仿函数]()
+> 代码 1-3 [带有状态的仿函数]()
 
 ```cpp
 #include<algorithm>
@@ -116,7 +116,7 @@ num calls: 2
 
 想要达到这个效果，我们需要在仿函数中创建一个成员变量并且在构造器中初始化它。
 
-> 代码1-4 [带有“捕获”变量的仿函数](https://wandbox.org/permlink/ogenCfT7ZCTbRIkZ)
+> 代码 1-4 [带有“捕获”变量的仿函数](https://wandbox.org/permlink/ogenCfT7ZCTbRIkZ)
 
 ```cpp
 #include <algorithm>
@@ -144,7 +144,7 @@ int main() {
 }
 ```
 
-在这个版本中， `PrintFunctor` 使用了一个额外的参数来初始化成员变量。
+在这个版本中，`PrintFunctor` 使用了一个额外的参数来初始化成员变量。
 
 然后这个变量在调用操作符中被使用。所以最终期望的输出是：
 
@@ -166,7 +166,7 @@ num calls: 2
 
 来看看这段代码：
 
-> 代码1-5 本地仿函数类
+> 代码 1-5 本地仿函数类
 
 ```cpp
 int main() {
@@ -180,7 +180,7 @@ int main() {
 }
 ```
 
-您可以用 GCC 来尝试编译它（带上 C++98 的标签 `-std=c++98` ），当然不出意外，将会出现如下的编译错误：
+您可以用 GCC 来尝试编译它（带上 C++98 的标签 `-std=c++98`），当然不出意外，将会出现如下的编译错误：
 
 ```plaintext
 error: template argument for
@@ -191,7 +191,7 @@ uses local type 'main()::PrintFunctor'
 
 在 C++98/03 中，你不能用本地类型来初始化一个模板。
 
-当认识到并理解了这些限制产生的原因， C++ 开发者就可以在 C++98/03 中找到一种解决办法：使用一组辅助函数。
+当认识到并理解了这些限制产生的原因，C++ 开发者就可以在 C++98/03 中找到一种解决办法：使用一组辅助函数。
 
 ## 3. 使用辅助函数
 
@@ -201,17 +201,17 @@ uses local type 'main()::PrintFunctor'
 
 例如：
 
-- `std::plus<T>()` - 传入两个参数并返回他们的和
-- `std::minus<T>()` - 传入两个参数并返回他们的差
-- `std::less<T>()` - 传入两个参数并判断第一个参数是否小于第二个参数
-- `std::greater_equal<T>()` - 传入两个参数并判断第一个参数是否大于等于第二个参数
-- `std::bind1st` - 用给定的第一个参数创建一个可调用对象
-- `std::bind2nd` - 用给定的第二个参数创建一个可调用对象
-- 等等
+* `std::plus<T>()`- 传入两个参数并返回他们的和
+* `std::minus<T>()`- 传入两个参数并返回他们的差
+* `std::less<T>()`- 传入两个参数并判断第一个参数是否小于第二个参数
+* `std::greater_equal<T>()`- 传入两个参数并判断第一个参数是否大于等于第二个参数
+* `std::bind1st`- 用给定的第一个参数创建一个可调用对象
+* `std::bind2nd`- 用给定的第二个参数创建一个可调用对象
+* 等等
 
 让我们编写一些充分利用这些辅助函数的代码：
 
-> 代码1-6 [使用旧 C++98/03 的辅助函数](https://wandbox.org/permlink/9KgfRwwC3Dza2ZVh)
+> 代码 1-6 [使用旧 C++98/03 的辅助函数](https://wandbox.org/permlink/9KgfRwwC3Dza2ZVh)
 
 ```cpp
 #include <algorithm>
@@ -228,11 +228,11 @@ int main() {
 }
 ```
 
-这个例子使用 `std::less` 并且用 `std::bind2nd` 来固定第二个参数，同时，这个整体又被传入了 `std::count_if` 。
+这个例子使用 `std::less` 并且用 `std::bind2nd` 来固定第二个参数，同时，这个整体又被传入了 `std::count_if`。
 
 您可能会猜到，这个代码可以展开为一个用来简单判断大小关系的函数：`return x < 5;`
 
-如果你准备好使用等多的辅助函数，您也可以看看 `boost` 库，例如 `boost::bind` 。
+如果你准备好使用等多的辅助函数，您也可以看看 `boost` 库，例如 `boost::bind`。
 
 不幸的是，最主要的问题是这种方式十分的复杂并且语法不易学习。
 
@@ -240,7 +240,7 @@ int main() {
 
 来看看这个：
 
-> 代码1-7 [组合使用辅助函数](https://wandbox.org/permlink/D7XjbyM0i2nslhRU)
+> 代码 1-7 [组合使用辅助函数](https://wandbox.org/permlink/D7XjbyM0i2nslhRU)
 
 ```cpp
 using std::placeholders::_1;
@@ -254,15 +254,15 @@ const size_t val = std::count_if(v.begin(), v.end(),
 // _1 comes from the std::placeholder namespace
 ```
 
-这个组合使用 `std::bind` （当然了 `std::bind` 是 C++11 的功能，而不是 C++98/03 ）并结合 `std::greater` 和 `std::less_equal` 甚至联系到 `std::logical_and` 。
+这个组合使用 `std::bind`（当然了 `std::bind` 是 C++11 的功能，而不是 C++98/03）并结合 `std::greater` 和 `std::less_equal` 甚至联系到 `std::logical_and`。
 
-哦对， `_1` 是一个第一输入参数的占位符。
+哦对，`_1` 是一个第一输入参数的占位符。
 
 尽管上述代码有效，并且您可以在本地定义它，但您不得不忍痛它很复杂且语法不自然。
 
 更何况这个组合只代表一个简单的条件：`return x > 2 && x <= 6;`。
 
-有什么更好以及更自然的方式吗?
+有什么更好以及更自然的方式吗？
 
 ## 4. 新特性的动机
 
@@ -272,7 +272,7 @@ const size_t val = std::count_if(v.begin(), v.end(),
 
 幸运的是，在 C++11 中我们有了很多新的提升。
 
-首先， C++ 委员会解除了使用本地类型的模板进行实例化的限制。
+首先，C++ 委员会解除了使用本地类型的模板进行实例化的限制。
 
 现在你可以在你需要的地方编写本地仿函数了。
 
@@ -284,6 +284,6 @@ C++ 从此开启了更简洁、更紧凑的语法的新篇章。
 
 这就是 Lambda 表达式的诞生。
 
-如果我们回头看看 [N3337](https://timsong-cpp.github.io/cppwp/n3337/) 草案 —— C++11 的最终草案，我们可以看到关于 lambda 的独立章节[[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n3337/expr.prim.lambda)
+如果我们回头看看 [N3337](https://timsong-cpp.github.io/cppwp/n3337/) 草案——C++11 的最终草案，我们可以看到关于 lambda 的独立章节 [\[expr.prim.lambda\]](https://timsong-cpp.github.io/cppwp/n3337/expr.prim.lambda)
 
 下个章节，我们将一起看看这个新的 C++ 特性。

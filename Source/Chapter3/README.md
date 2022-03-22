@@ -2,20 +2,20 @@
 
 C++14 为 Lambda 表达式提供了两个显著的增强特性
 
-- 带有初始化的捕获
-- 泛型 Lambda
-此外，该标准还更新了一些规则，例如：
-- Lambda 表达式的默认参数
-- `auto` 返回类型
+* 带有初始化的捕获
+* 泛型 Lambda
+  此外，该标准还更新了一些规则，例如：
+* Lambda 表达式的默认参数
+* `auto` 返回类型
 
-这些新增特性可以在 [N4140](https://timsong-cpp.github.io/cppwp/n4140/) 中的 Lambda 部分 [[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda) 找到。
+这些新增特性可以在 [N4140](https://timsong-cpp.github.io/cppwp/n4140/) 中的 Lambda 部分 [\[expr.prim.lambda\]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda) 找到。
 
 在本章中，你将学到：
 
-- 捕获成员变量
-- 用现代 C++ 技术代替旧功能，如 `std::bind1st`
-- LIFTING
-- 递归 Lambda
+* 捕获成员变量
+* 用现代 C++ 技术代替旧功能，如 `std::bind1st`
+* LIFTING
+* 递归 Lambda
 
 ## 1. 为 Lambda 增加默认参数
 
@@ -23,7 +23,7 @@ C++14 为 Lambda 表达式提供了两个显著的增强特性
 
 在 C++14 中，你可以在 Lambda 调用中使用默认参数了。这一小小的更新让 Lambda 函数更像一个常规函数了。
 
-> 代码3-1 [带有默认参数的 Lambda](https://wandbox.org/permlink/T2u5iuGqi3fHaN9q)
+> 代码 3-1 [带有默认参数的 Lambda](https://wandbox.org/permlink/T2u5iuGqi3fHaN9q)
 
 ```cpp
 #include <iostream>
@@ -37,13 +37,13 @@ int main() {
 }
 ```
 
-见用例所示，我们可以调用这个 Lambda 两次：第一次不携带任何参数，结果将输出默认的 `10` ，第二次我们传递参数 `100` 进去，结果会输出 `100` 。
+见用例所示，我们可以调用这个 Lambda 两次：第一次不携带任何参数，结果将输出默认的 `10`，第二次我们传递参数 `100` 进去，结果会输出 `100`。
 
 不过，这一特性早已在 GCC 和 Clang 的 C++11 版本中被支持了。
 
 ## 2. 返回类型
 
-如果你还记得之前章节的内容，那么你一定知道，对于一个简单的 Lambda ，编译器可以推断出它的返回类型。
+如果你还记得之前章节的内容，那么你一定知道，对于一个简单的 Lambda，编译器可以推断出它的返回类型。
 
 这个功能是在常规函数上“扩展”的，在 C++14 中你可以使用 `auto` 作为返回类型
 
@@ -55,11 +55,11 @@ auto myFunction() {
 }
 ```
 
-如上，编译器会推断返回类型为 `int` 。
+如上，编译器会推断返回类型为 `int`。
 
-推断返回类型的这部分内容在 C++14 中得到了改善和扩展。对于 Lambda 表达式来说，这意味着他们可以和常规函数享有同样的 `auto` 返回类型（[[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda#4)）：
+推断返回类型的这部分内容在 C++14 中得到了改善和扩展。对于 Lambda 表达式来说，这意味着他们可以和常规函数享有同样的 `auto` 返回类型（[\[expr.prim.lambda\]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda#4)）：
 
-> 如果 Lambda 返回类型是 `auto` ，那么它会被尾部返回类型所替代（如果提供了）或者从 `return` 语句中推导。详见 [[dcl.spec.auto]](https://timsong-cpp.github.io/cppwp/n4140/dcl.spec.auto)
+> 如果 Lambda 返回类型是 `auto`，那么它会被尾部返回类型所替代（如果提供了）或者从 `return` 语句中推导。详见 [\[dcl.spec.auto\]](https://timsong-cpp.github.io/cppwp/n4140/dcl.spec.auto)
 
 如果在 Lambda 中有多条返回语句，他们必须能够推断出同样的类型：
 
@@ -78,13 +78,13 @@ auto foo = [](int x){
 
 尽管推断整形和双精度型也是很有用的，但是推断返回类型之所以有更显著的价值，是因为它可以在模板代码这种“未知”领域发挥极大地在作用。
 
-举个例子， Lambda 闭包类型是匿名的，并且我们无法显式的明确它。
+举个例子，Lambda 闭包类型是匿名的，并且我们无法显式的明确它。
 
 但是如果你想从函数中返回一个 Lambda 呢？你要如何明明确这个类型？
 
-在 C++14 之前，你可以用 `std::function` ：
+在 C++14 之前，你可以用 `std::function`：
 
-> 代码3-2 [返回 `std::function`](https://wandbox.org/permlink/oCij1KoIB8RVOvSI)
+> 代码 3-2 [返回 `std::function`](https://wandbox.org/permlink/oCij1KoIB8RVOvSI)
 
 ```cpp
 #include <functional>
@@ -103,11 +103,11 @@ int main() {
 }
 ```
 
-然而，上面这种方法并不足够直接。它要求你明确了一个函数签名，甚至包含了额外的头文件 `<functional>` 。如果你还记得 C++11 的内容的话， `std::function` 是一个“笨重”的对象（在 GCC9 中， `function` 的 `sizeof` 是 32 bytes ）。并且，它需要一些高级的内部机制，以便它可以处理任何可调用的对象。
+然而，上面这种方法并不足够直接。它要求你明确了一个函数签名，甚至包含了额外的头文件 `<functional>`。如果你还记得 C++11 的内容的话，`std::function` 是一个“笨重”的对象（在 GCC9 中，`function` 的 `sizeof` 是 32 bytes）。并且，它需要一些高级的内部机制，以便它可以处理任何可调用的对象。
 
 感谢 C++14 带来的改进，我们可以极大的简化上面的代码：
 
-> 代码3-3 [Lambda 推断的 `auto` 返回类型](https://wandbox.org/permlink/RLEHfrCk29aqRn8X)
+> 代码 3-3 [Lambda 推断的 `auto` 返回类型](https://wandbox.org/permlink/RLEHfrCk29aqRn8X)
 
 ```cpp
 #include <iostream>
@@ -129,7 +129,7 @@ int main() {
 
 在 GCC 上，最后 `lam` 这个返回的 Lambda 对象的大小仅为 4 字节，并且比使用 `std::function` 的解决方案便宜得多。
 
-这里有一点需要注意，我们也可以将 `CreateMulLambda` 标记为 `noexcept` ，这样无论如何它都不可以抛出任何异常。
+这里有一点需要注意，我们也可以将 `CreateMulLambda` 标记为 `noexcept`，这样无论如何它都不可以抛出任何异常。
 
 但是 `std::function` 就不行了。
 
@@ -145,11 +145,11 @@ int main() {
 
 这样你就可以在 Lambda 内部访问那些变量了。
 
-这叫做 **通过初始化器捕获** 或者你也可以用另一个名字 **广义 Lambda 捕获** 。
+这叫做 **通过初始化器捕获** 或者你也可以用另一个名字 **广义 Lambda 捕获**。
 
 看个简单的例子：
 
-> 代码3-4 [通过初始化器捕获](https://wandbox.org/permlink/461XKCYNsQSKQeKO)
+> 代码 3-4 [通过初始化器捕获](https://wandbox.org/permlink/461XKCYNsQSKQeKO)
 
 ```cpp
 #include <iostream>
@@ -173,7 +173,7 @@ int main() {
 42
 ```
 
-在这个例子中，编译会生成一个新的成员变量并且将其初始化为 `x + y` 。
+在这个例子中，编译会生成一个新的成员变量并且将其初始化为 `x + y`。
 
 这个新变量的类型会被自动推断出来，即便你在变量前加上了 `auto` 关键字：
 
@@ -193,7 +193,7 @@ struct _unnamedLambda {
 } someInstance;
 ```
 
-当 Lambda 的表达式定义完成时， `z` 将会被直接初始化 `x + y` 。
+当 Lambda 的表达式定义完成时，`z` 将会被直接初始化 `x + y`。
 
 上面这句的含义就是：新变量在你定义 Lambda 的地方初始化，而不是你调用它的地方。
 
@@ -205,7 +205,7 @@ struct _unnamedLambda {
 
 当然，通过初始化器创建变量也可以是灵活的，不妨看看下面这个例子：创建一个外部范围的引用变量。
 
-> 代码3-5 [通过初始化器进行引用捕获](https://wandbox.org/permlink/TVb2allLLdRQ1aPe)
+> 代码 3-5 [通过初始化器进行引用捕获](https://wandbox.org/permlink/TVb2allLLdRQ1aPe)
 
 ```cpp
 #include <iostream>
@@ -221,9 +221,9 @@ int main() {
 }
 ```
 
-这次，变量 `z` 是引用自变量 `x` ，当然你也可以写成这样 `auto & z = x` 。
+这次，变量 `z` 是引用自变量 `x`，当然你也可以写成这样 `auto & z = x`。
 
-如果运行这段代码，你应该可以看到，第一行会输出30，但是第二行会输出 `0` 。
+如果运行这段代码，你应该可以看到，第一行会输出 30，但是第二行会输出 `0`。
 
 这是因为我们进行了一个引用捕获，当你修改了引用内容时，对象 `z` 自然也会随之变化。
 
@@ -231,15 +231,15 @@ int main() {
 
 需要注意，在使用初始化器捕获时，有一些限制：
 
-一个是，当你通过初始化器进行引用捕获时，她不可能写入一个右值引用 `&&` 。这是因为如下的代码目前是非法的：
+一个是，当你通过初始化器进行引用捕获时，她不可能写入一个右值引用 `&&`。这是因为如下的代码目前是非法的：
 
 ```cpp
 [&& z = x] //非法语法
 ```
 
-另一个该特性的限制是，它不允许传入参数包。在条款 [[expr.prim.lambda]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda#24) 的 24 节可以阅读到如下内容：
+另一个该特性的限制是，它不允许传入参数包。在条款 [\[expr.prim.lambda\]](https://timsong-cpp.github.io/cppwp/n4140/expr.prim.lambda#24) 的 24 节可以阅读到如下内容：
 
-带有省略号的简单捕获是包扩展（[[temp.variadic]](https://timsong-cpp.github.io/cppwp/n4140/temp.variadic)）， 但是 init-capture 带有省略号是格式错误。
+带有省略号的简单捕获是包扩展（[\[temp.variadic\]](https://timsong-cpp.github.io/cppwp/n4140/temp.variadic)），但是 init-capture 带有省略号是格式错误。
 
 简而言之，在 C++14 中，你并不能这样写代码：
 
@@ -250,7 +250,7 @@ auto captureTest(Args... args) {
     ...
 ```
 
-但是，这个语法，在 C++20 中是支持的，如果想提前了解，可以参考[这个]()。
+但是，这个语法，在 C++20 中是支持的，如果想提前了解，可以参考 [这个]()。
 
 ### 对现有问题的改进
 
@@ -258,9 +258,9 @@ auto captureTest(Args... args) {
 
 #### Move 移动
 
-在 C++11 中，你无法通过值捕获的方式捕获一个唯一指针（ `unique_pointer` ），只能进行引用捕获。但是现在在 C++14 中，我们可以移动一个对象到闭包类型的成员中：
+在 C++11 中，你无法通过值捕获的方式捕获一个唯一指针（`unique_pointer`），只能进行引用捕获。但是现在在 C++14 中，我们可以移动一个对象到闭包类型的成员中：
 
-> 代码3-6 [捕获一个仅可移动类型](https://wandbox.org/permlink/n65fzPHrNnyDqbIK)
+> 代码 3-6 [捕获一个仅可移动类型](https://wandbox.org/permlink/n65fzPHrNnyDqbIK)
 
 ```cpp
 #include <iostream>
@@ -283,13 +283,13 @@ pointer in main(): 0
 pointer in lambda: 0x1413c20
 ```
 
-有了捕获初始化器，你就可以移动一个指针的所有权到 Lambda 中。如你所见，在上面这个例子中，唯一指针在闭包对象被创建后立即被设为了 `nullptr` 。
+有了捕获初始化器，你就可以移动一个指针的所有权到 Lambda 中。如你所见，在上面这个例子中，唯一指针在闭包对象被创建后立即被设为了 `nullptr`。
 
 但是当你调用这个 Lambda 时，你会看见一个合法的内存地址。
 
 #### `std::function` 中的陷阱
 
-在lambda中拥有一个仅可移动的捕获变量会让闭包对象变得不能被拷贝。
+在 lambda 中拥有一个仅可移动的捕获变量会让闭包对象变得不能被拷贝。
 
 当你想在 `std::function` 中存储一个 Lambda，而这个 Lambda 接受仅可拷贝的可调用对象的时候，就会出现问题。
 
@@ -299,20 +299,20 @@ pointer in lambda: 0x1413c20
 
 简而言之，这段代码无法编译：
 
-> 代码3-7 `std::function` 和 `std::move`
+> 代码 3-7 `std::function` 和 `std::move`
 
 ```cpp
 std::unique_ptr<int> p(new int{10});
 std::function<void()> fn = [ptr = std::move(p)](){}; //不可编译
 ```
 
-如果您想要完整的细节，您还可以查看草案([P0288]())中的 any_invokable ，这是 `std::function` 未来可能的改进，并且还会处理仅可移动类型。
+如果您想要完整的细节，您还可以查看草案（[P0288]()）中的 any\_invokable，这是 `std::function` 未来可能的改进，并且还会处理仅可移动类型。
 
 #### 优化 Optimisation
 
 有一个将捕获初始化器作为潜在的性能优化的点子：我们可以在初始化器中计算一次，而不是每次调用 Lambda 时都计算某个值：
 
-> 代码3-8 [给 Lambda 创建一个 `string`](https://wandbox.org/permlink/GWcJNoUsBFnscOp3)
+> 代码 3-8 [给 Lambda 创建一个 `string`](https://wandbox.org/permlink/GWcJNoUsBFnscOp3)
 
 ```cpp
 #include <algorithm>
@@ -337,7 +337,7 @@ int main() {
 }
 ```
 
-上面的代码对 `std::find_if` 调用了两次。 在第一个场景中，我们捕获 `prefix` 并将输入值与 `prefix + "bar"s` 进行比较。
+上面的代码对 `std::find_if` 调用了两次。在第一个场景中，我们捕获 `prefix` 并将输入值与 `prefix + "bar"s` 进行比较。
 
 每次调用 Lambda 时，都必须创建并计算一个临时值来存储这些字符串的总和。
 
@@ -347,7 +347,7 @@ int main() {
 
 字符串的总和只会运行一次，而不是每次调用 lambda 时都会运行。
 
-该示例还使用了 `std::string_literals` ，这就是为什么我们可以编写代表 `std::string` 对象的 `"foo"s`。
+该示例还使用了 `std::string_literals`，这就是为什么我们可以编写代表 `std::string` 对象的 `"foo"s`。
 
 #### 捕获成员变量
 
@@ -355,7 +355,7 @@ int main() {
 
 看个例子吧：
 
-> 代码3-9 [捕获一个成员变量](https://wandbox.org/permlink/E65tipdkDj2nrdF5)
+> 代码 3-9 [捕获一个成员变量](https://wandbox.org/permlink/E65tipdkDj2nrdF5)
 
 ```cpp
 #include <algorithm>
@@ -383,9 +383,9 @@ int main() {
 
 此外，我们使用 `auto` 来进行成员函数 `foo()` 返回类型的推断。
 
-当然，在 C++11 中，你也可以使用 `std::function` ，详见 [捕获成员变量和 `this` 指针](../Chapter2/README.md#捕获类成员和-`this`-指针)。
+当然，在 C++11 中，你也可以使用 `std::function`，详见 [捕获成员变量和 `this` 指针](../Chapter2/README.md#捕获类成员和-`this`-指针)。
 
-在这里我们在lambda中使用了一个很“奇怪”的语法 `[ s = s ]` ，这段代码能够工作的原因是捕获到的变量是在闭包类型内部的，而非外部。所以这里就没有歧义冲突了。
+在这里我们在 lambda 中使用了一个很“奇怪”的语法 `[ s = s ]`，这段代码能够工作的原因是捕获到的变量是在闭包类型内部的，而非外部。所以这里就没有歧义冲突了。
 
 ## 4. 泛型 Lambda
 
@@ -393,9 +393,9 @@ int main() {
 
 Lambda 的早期规范允许我们创建匿名函数对象并将它们传递给标准库中的各种泛型算法。
 
-然而，闭包本身并不是“泛型”的。 例如，您不能将模板参数指定为 Lambda 的参数。
+然而，闭包本身并不是“泛型”的。例如，您不能将模板参数指定为 Lambda 的参数。
 
-当然，在C++14中，标准引入了 **泛型 Lambda** 现在我们可以这样写：
+当然，在 C++14 中，标准引入了 **泛型 Lambda** 现在我们可以这样写：
 
 ```cpp
 const auto foo = [](auto x, int y) {
@@ -407,7 +407,7 @@ foo(10.1234, 2);
 foo("hello world", 3);
 ```
 
-注意 Lambda 的参数 `auto x` ，它等同于在闭包类型中使用一个模板声明：
+注意 Lambda 的参数 `auto x`，它等同于在闭包类型中使用一个模板声明：
 
 ```cpp
   struct {
@@ -439,7 +439,7 @@ struct{
 
 看这个栗子：
 
-> 代码3-10 [用于求和的可变泛型 Lambda](https://wandbox.org/permlink/EVw677hLJwKpSpPg)
+> 代码 3-10 [用于求和的可变泛型 Lambda](https://wandbox.org/permlink/EVw677hLJwKpSpPg)
 
 ```cpp
 #include <iostream>
@@ -472,17 +472,17 @@ struct __anoymousLambda{
 };
 ```
 
-在 C++17 中，我们有了新的选择 [折叠表达式]() ，它可以改进泛型可变参数 Lambdas，而在 C++20 中，我们将获得对模板参数的更多控制。
+在 C++17 中，我们有了新的选择 [折叠表达式]()，它可以改进泛型可变参数 Lambdas，而在 C++20 中，我们将获得对模板参数的更多控制。
 
 有关更多信息，请参阅 C++17 对可变参数泛型 Lambdas 的更新以及 C++20 中关于 [模板 Lambda]() 的信息
 
 ### 使用泛型 Lambda 进行完美转发
 
-使用泛型 Lambda 表达式，其实并不限定在只使用 `auto x`，您可以像其他 `auto` 变量一样添加任何限定符，如 `auto&` 、`const auto&` 或 `auto&&` 。
+使用泛型 Lambda 表达式，其实并不限定在只使用 `auto x`，您可以像其他 `auto` 变量一样添加任何限定符，如 `auto&`、`const auto&` 或 `auto&&`。
 
-有一个十分便利的点是，你可以指定 `auto&& x` 使其成为转发（泛型）引用。 这使您可以完美地转发输入参数：
+有一个十分便利的点是，你可以指定 `auto&& x` 使其成为转发（泛型）引用。这使您可以完美地转发输入参数：
 
-> 代码3-11 [泛型 Lambda 进行完美转发](https://wandbox.org/permlink/kA2GNHFiLOGDu9d9)
+> 代码 3-11 [泛型 Lambda 进行完美转发](https://wandbox.org/permlink/kA2GNHFiLOGDu9d9)
 
 ```cpp
 #include <iostream>
@@ -518,7 +518,7 @@ foo(string&&)
 
 示例代码定义了两个函数重载 `foo` 用于对 `std::string` 的 `const` 引用，另一个用于对 `std::string` 的右值引用。
 
-`callFoolambda` 使用泛型参数作为泛型引用（[引用资料6](https://isocpp.org/blog/2014/09/noexcept-optimization)）.
+`callFoolambda` 使用泛型参数作为泛型引用（[引用资料 6](https://isocpp.org/blog/2014/09/noexcept-optimization)）。
 
 如果您想将此 Lambda 重写为常规函数模板，它可能如下所示：
 
@@ -540,7 +540,7 @@ void callFooFunc(T&& str) {
 
 来看个例子：
 
-> 代码3-13 [对 `std::map` 的迭代器进行类型纠正](https://wandbox.org/permlink/pSbtIA2lgYa6r1bW)
+> 代码 3-13 [对 `std::map` 的迭代器进行类型纠正](https://wandbox.org/permlink/pSbtIA2lgYa6r1bW)
 
 ```cpp
 #include <algorithm>
@@ -557,11 +557,11 @@ int main() {
 }
 ```
 
-这段代码有问题吗？ `entry` 的类型正确吗？
+这段代码有问题吗？`entry` 的类型正确吗？
 
 很明显，这里是有问题的。
 
-`std::map` 的类型应该是 `std::pair<const key, T>` 而不是 `const std::pair<Key, T> `。而在我们的代码中，会造成不必要的额外拷贝，在 `std::pair<const std::string, int>` 和 `const std::pair<std::string, int>&` (其中 `const std::string` 对 `std::string` 的转换)之间。
+`std::map` 的类型应该是 `std::pair<const key, T>` 而不是 `const std::pair<Key, T> `。而在我们的代码中，会造成不必要的额外拷贝，在 `std::pair<const std::string, int>` 和 `const std::pair<std::string, int>&`（其中 `const std::string` 对 `std::string` 的转换）之间。
 
 修复一下代码，它本应该是这样的：
 
@@ -578,7 +578,7 @@ std::for_each(std::begin(numbers), std::end(numbers),
 
 接下来我们看看另一段比较长的代码，打印了 `entry` 的内存地址：
 
-> 代码3-14 [对 `std::map` 的迭代器进行类型纠正，完整版](https://wandbox.org/permlink/yvow5G122f7A2SxN)
+> 代码 3-14 [对 `std::map` 的迭代器进行类型纠正，完整版](https://wandbox.org/permlink/yvow5G122f7A2SxN)
 
 ```cpp
 #include <algorithm>
@@ -628,23 +628,23 @@ int main() {
 
 ## 5. 使用 Lambda 代替 `std::bind1st` 和 `std::bind2nd`
 
-在C++98/03章节，我提到并展示了一些辅助函数，像 `std::bind1st` 和 `std::bind2nd` 之类。然而，这些函数在 C++11 中逐渐废弃，在 C++17 中，这些函数已被完全移除。
+在 C++98/03 章节，我提到并展示了一些辅助函数，像 `std::bind1st` 和 `std::bind2nd` 之类。然而，这些函数在 C++11 中逐渐废弃，在 C++17 中，这些函数已被完全移除。
 
-像 `bind1st()` / `bind2nd()` / `mem_fun()`等函数，都是在 C++98 时期被引入进标注库的，而现在这些函数已不再需要了，因为我们可以使用 Lambda 或者更现代化的 C++ 技巧来代替。
+像 `bind1st()`/`bind2nd()`/`mem_fun()` 等函数，都是在 C++98 时期被引入进标注库的，而现在这些函数已不再需要了，因为我们可以使用 Lambda 或者更现代化的 C++ 技巧来代替。
 
-当然了，这些函数也没有获得对于完美转发、泛型模板、 `decltype` 以及其他 C++11 特性的更新，所以，我建议不要在现代编程中使用这些已弃用的内容。
+当然了，这些函数也没有获得对于完美转发、泛型模板、`decltype` 以及其他 C++11 特性的更新，所以，我建议不要在现代编程中使用这些已弃用的内容。
 
 下面是已被废弃的函数列表：
 
-- unary_function()/pointer_to_unary_function()
-- binary_function()/pointer_to_binary_function()
-- bind1st()/binder1st
-- bind2nd()/binder2nd
-- ptr_fun()
-- mem_fun()
-- mem_fun_ref()
+* unary\_function()/pointer\_to\_unary\_function()
+* binary\_function()/pointer\_to\_binary\_function()
+* bind1st()/binder1st
+* bind2nd()/binder2nd
+* ptr\_fun()
+* mem\_fun()
+* mem\_fun\_ref()
 
-当然，仅仅是为了替换 `bind1st` 或者 `bind2nd` 的话，你可以使用 `std::bind` ( C++11 引入)或者 `std::bind_front` ( C++20 引入)。
+当然，仅仅是为了替换 `bind1st` 或者 `bind2nd` 的话，你可以使用 `std::bind`( C++11 引入）或者 `std::bind_front`( C++20 引入）。
 
 考虑下，这些我们之前使用旧函数所编写的这些代码要如何修改：
 
@@ -654,20 +654,21 @@ const auto minusOne =std::bind2nd(std::minus<int>(), 1);
 std::cout << onePlus(10) << ", " << minusOne(10) << '\n';
 ```
 
-这个例子中， `onePlus` 是由 `std::plus` 组成的一个可调用对象，并且第一参数被调用修正。
+这个例子中，`onePlus` 是由 `std::plus` 组成的一个可调用对象，并且第一参数被调用修正。
 
-换种说法，当你写下 `onePlus(n)` 的时候，它会被展开为 `std::plus(1, n)` 。
+换种说法，当你写下 `onePlus(n)` 的时候，它会被展开为 `std::plus(1, n)`。
 
-类似地， `minusOne` 是由 `std::minus` 组成的一个可调用对象，并且第二参数被调用修正。
+类似地，`minusOne` 是由 `std::minus` 组成的一个可调用对象，并且第二参数被调用修正。
 
 `miniusOne(n)` 会被展开为 `std::minus(n, 1)`。
 
 上面的语法可能会十分的麻烦，我们下面来看看如何用现代化 C++ 技术来优化他们。
+
 ### 使用现代 C++ 技术
 
 我们首先用 `std::bind()` 来替换 `bind1st` 和 `bind2nd`
 
-> 代码3-15 [用 `std::bind` 来代替](https://godbolt.org/z/bj9Txh)
+> 代码 3-15 [用 `std::bind` 来代替](https://godbolt.org/z/bj9Txh)
 
 ```cpp
 #include <algorithm>
@@ -684,7 +685,7 @@ int main() {
 
 `std::bind` 会更加灵活，它支持多个参数，甚至你可以对参数重新排序。
 
-在参数管理上，你需要使用 ***占位符placeholders*** 。
+在参数管理上，你需要使用 ***占位符 placeholders***。
 
 上面的例子中，使用了 `_1` 来代表第一个参数需要被传入最终的函数对象中的未知。
 
@@ -706,12 +707,13 @@ auto lamMinusOne1 =[a = 1](int b) { return b - a; };
 std::cout << lamOnePlus1(10) << ", " << lamMinusOne1(10) << '\n';
 ```
 
-很显然，Lambda 版本更简洁，更易读。 这一点将在后面更复杂的示例中更加凸显出来。
+很显然，Lambda 版本更简洁，更易读。这一点将在后面更复杂的示例中更加凸显出来。
+
 ### 函数组合
 
 最后一个例子，我们来看看这个，在表达式中嵌套使用函数组合：
 
-> 代码3-16 [`std::bind` 中使用函数组合](https://godbolt.org/z/8N7ZBX)
+> 代码 3-16 [`std::bind` 中使用函数组合](https://godbolt.org/z/8N7ZBX)
 
 ```cpp
 #include <algorithm>
@@ -744,7 +746,7 @@ const auto more2less6 = std::count_if(v.begin(), v.end(), [](int x) {
 
 现在应该好懂多了？
 
-> 有一些关于 `std::bind` 和 Lambda 的第三方指导性意见：比如《 Effective Modern C++ 》中的第 34 项条款，比如 Google Abseil Blog 中的[Avoid std::bind](https://abseil.io/tips/108)
+> 有一些关于 `std::bind` 和 Lambda 的第三方指导性意见：比如《Effective Modern C++》中的第 34 项条款，比如 Google Abseil Blog 中的 [Avoid std::bind](https://abseil.io/tips/108)
 
 ## 6. Lambda 提升（LIFTing with Lambda）
 
@@ -752,7 +754,7 @@ const auto more2less6 = std::count_if(v.begin(), v.end(), [](int x) {
 
 比如，向模板函数中传递有重载的函数作为可调用对象。
 
-> 代码3-17 调用重载函数
+> 代码 3-17 调用重载函数
 
 ```cpp
 #include <algorithm>
@@ -766,7 +768,7 @@ int main() {
 }
 ```
 
-这个例子里面 `foo` 分别有对于 `int` 和 `float` 的两个重载，并且作为可调用对象传递给了模板函数 `for_each` 。遗憾的是，在 GCC9 中，编译会提示如下错误：
+这个例子里面 `foo` 分别有对于 `int` 和 `float` 的两个重载，并且作为可调用对象传递给了模板函数 `for_each`。遗憾的是，在 GCC9 中，编译会提示如下错误：
 
 ```plaintext
 error: no matching function for call to
@@ -776,7 +778,7 @@ for_each(std::vector<int>::iterator, std::vector<int>::iterator,
                                        ^^^^^
 ```
 
-这里出错的主要原因是， `foo` 作为一个模板参数，它需要重新被确定为一个确定的类型。但是 `foo` 本身又有两个重载，并且实际上数据可以同时被两个重载都接受，这是编译器所不能接受的。
+这里出错的主要原因是，`foo` 作为一个模板参数，它需要重新被确定为一个确定的类型。但是 `foo` 本身又有两个重载，并且实际上数据可以同时被两个重载都接受，这是编译器所不能接受的。
 
 但是，这里有个技巧就是，我们可以使用 Lambda 来代替重载的可调用对象。上面的代码即可修改为：
 
@@ -784,7 +786,7 @@ for_each(std::vector<int>::iterator, std::vector<int>::iterator,
 std::for_each(vi.begin(), vi.end(), [](auto x) { return foo(x); });
 ```
 
-现在我们也可以用包装器（泛型 Lambda ）来解决重载的问题，让调用时可以找到适当的重载对象。
+现在我们也可以用包装器（泛型 Lambda）来解决重载的问题，让调用时可以找到适当的重载对象。
 
 当然，我们也可以使用完美转发来更加巧妙的规避掉重载的情况。
 
@@ -796,7 +798,7 @@ std::for_each(vi.begin(), vi.end(), [](auto &&x) {
 
 下面是一个应用的例子：
 
-> 代码3-18 [泛型Lambda和函数重载](https://wandbox.org/permlink/2t1M9lUnTT16LjnU)
+> 代码 3-18 [泛型 Lambda 和函数重载](https://wandbox.org/permlink/2t1M9lUnTT16LjnU)
 
 ```cpp
 #include <algorithm>
@@ -833,23 +835,23 @@ int main() {
 
 看着有点懵？别急，我们来一点点解析这段代码的功能。
 
-- 返回 `foo(std::forward<decltype(x)>(x)...)`
-  - 完美转发，这样我们才能完整传递输入参数到 `foo` 函数中，并且保留类型。
-- `noexcept(noexcept(foo(std::forward<decltype(x)>(x)...)))`
-  - 使用 `noexcept` 操作符（被嵌套的那一个）检查 可调用对象 `foo` 的异常规范。
-  - 依赖于异常的检查结果，最终会产生 `noexcept(true)` 或者 `noexcept(false)` 。
-- `decltype(foo(std::forward<decltype(x)>(x)...))`
-  - 推断包装 Lambda 的最终返回类型
+* 返回 `foo(std::forward<decltype(x)>(x)...)`
+  * 完美转发，这样我们才能完整传递输入参数到 `foo` 函数中，并且保留类型。
+* `noexcept(noexcept(foo(std::forward<decltype(x)>(x)...)))`
+  * 使用 `noexcept` 操作符（被嵌套的那一个）检查 可调用对象 `foo` 的异常规范。
+  * 依赖于异常的检查结果，最终会产生 `noexcept(true)` 或者 `noexcept(false)`。
+* `decltype(foo(std::forward<decltype(x)>(x)...))`
+  * 推断包装 Lambda 的最终返回类型
 
 Lambda 提升（LIFT）通过宏定义的方式实现，不然每次需要使用提升的时候你都需要编写类似的代码，并将其传递给一个算法中。而使用宏定义，这是一种最简单的语法实现了。
 
-有兴趣的话，可以看看使用 Lambda 提升后的[最终代码](https://wandbox.org/permlink/r81jASiPPmYXTOmx)。
+有兴趣的话，可以看看使用 Lambda 提升后的 [最终代码](https://wandbox.org/permlink/r81jASiPPmYXTOmx)。
 
 ## 7. 递归 Lambda
 
 如果你有一个常规函数，那么递归调用这函数十分容易的。比如，我们计算阶乘时候的递归函数应该是这样的：
 
-> 代码3-19 [常规函数的递归调用](https://wandbox.org/permlink/BKwwFt2eW7Nd3gIV)
+> 代码 3-19 [常规函数的递归调用](https://wandbox.org/permlink/BKwwFt2eW7Nd3gIV)
 
 ```cpp
 int factorial(int n) {
@@ -863,7 +865,7 @@ int main() {
 
 我们来尝试用 Lambda 的方式进行递归：
 
-> 代码3-20 [Lambda递归的错误示例](https://wandbox.org/permlink/etbPCZDuFUUYfit0)
+> 代码 3-20 [Lambda 递归的错误示例](https://wandbox.org/permlink/etbPCZDuFUUYfit0)
 
 ```cpp
 int main() {
@@ -897,14 +899,14 @@ auto factorial = fact{};
 
 如果我们要实现递归，那么这里有两个途径可以考虑下：
 
-- 使用 `std::function` 并且捕获它
-- 使用内部 Lambda 然后传递泛型参数
+* 使用 `std::function` 并且捕获它
+* 使用内部 Lambda 然后传递泛型参数
 
 ### 利用 `std::function`
 
 将 Lambda 表达式赋值给一个 `std::function`，后续捕获该这个对象到 Lambda 函数体内，实现递归。
 
-> 代码3-21 [使用 `std::function` 实现 Lambda 递归](https://wandbox.org/permlink/ogZxy9CvAvRBUfJL)
+> 代码 3-21 [使用 `std::function` 实现 Lambda 递归](https://wandbox.org/permlink/ogZxy9CvAvRBUfJL)
 
 ```cpp
 #include <functional>
@@ -916,19 +918,19 @@ int main() {
 }
 ```
 
-这个示例里面，我们在 Lambda 函数体内调用捕获的 `std::function` 对象 `factorial` 。
+这个示例里面，我们在 Lambda 函数体内调用捕获的 `std::function` 对象 `factorial`。
 
 此时这个对象是完整定义的，所以编译器访问并调用对象就不存在问题了。
 
-如果你想使用一个无状态的 Lambda，那么你甚至可以使用一个函数指针来代替 `std::function` ，这样内存占用会更少。
+如果你想使用一个无状态的 Lambda，那么你甚至可以使用一个函数指针来代替 `std::function`，这样内存占用会更少。
 
 但是，但是，下面这种方式会更好。
 
 ### 内部 Lambda 和泛型参数
 
-来看看C++14中的用法：
+来看看 C++14 中的用法：
 
-> 代码3-22 [使用内部 Lambda 来实现 Lambda 递归](https://wandbox.org/permlink/B0ueQ9nbZmr8PQE3)
+> 代码 3-22 [使用内部 Lambda 来实现 Lambda 递归](https://wandbox.org/permlink/B0ueQ9nbZmr8PQE3)
 
 ```cpp
 int main() {
@@ -942,17 +944,18 @@ int main() {
 }
 ```
 
-这次我们创建了一个内部 Lambda （`f_impl`）来执行主逻辑。
+这次我们创建了一个内部 Lambda（`f_impl`）来执行主逻辑。
 
-同时，我们向它传递一个泛型参数 `const auto& impl` ， 这个参数是一个我们可以递归调用的可调用对象。
+同时，我们向它传递一个泛型参数 `const auto& impl`，这个参数是一个我们可以递归调用的可调用对象。
 
 多亏了 C++14 中的泛型 Lambda，我们可以避免 `std::function` 的开销并依赖 `auto` 进行类型推导。
+
 ### 更多技巧
 
-可以参阅下面两个链接来学习更多关于lambda递归的技巧：
+可以参阅下面两个链接来学习更多关于 lambda 递归的技巧：
 
-- [Recursive lambda functions in C++11](https://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11)
-- [Recursive lambdas in C++(14) - Pedro Melendez](http://pedromelendez.com/blog/2015/07/16/recursive-lambdas-in-c14/)
+* [Recursive lambda functions in C++11](https://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11)
+* [Recursive lambdas in C++(14) - Pedro Melendez](http://pedromelendez.com/blog/2015/07/16/recursive-lambdas-in-c14/)
 
 ### 使用递归 Lambda 是最好的选择吗？
 
@@ -966,8 +969,8 @@ int main() {
 
 ## 8. 总结
 
-在本章， C++14 为 Lambda 表达式带来了几个关键性的改进。
+在本章，C++14 为 Lambda 表达式带来了几个关键性的改进。
 
-由于 C++14 可以在 Lambda 范围内声明新的变量，开发者可以在模板代码中更高效的使用 Lambda 。
+由于 C++14 可以在 Lambda 范围内声明新的变量，开发者可以在模板代码中更高效的使用 Lambda。
 
 在下一章中，我们会移步 C++17，来看看更多的 Lambda 更新。
