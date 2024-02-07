@@ -1,13 +1,19 @@
 {
-    "private": true,
-    "scripts": {
-        "build": "mkdocs build",
-        "dev": "mkdocs serve",
-        "lint": "remark ./Source/**/*.md --quiet --frail",
-        "lint:fix": "remark ./Source/**/*.md --quiet --frail --output"
-    },
-    "dependencies": {
-        "remark-cli": "^10.0.1",
-        "remark-preset-lint-mkdocs-material": "^0.6.0"
-    }
+  "private": true,
+  "scripts": {
+    "build": "mkdocs build",
+    "dev": "mkdocs serve",
+    "lint": "remark ./Source/**/*.md --quiet --frail",
+    "lint:fix": "remark ./Source/**/*.md --quiet --frail --output",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "remark-cli": "^10.0.1",
+    "remark-preset-lint-mkdocs-material": "^0.6.0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.25"
+  }
 }
