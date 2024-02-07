@@ -4,6 +4,9 @@
 
 或者如果您认识相关的翻译工作者或者出版社，可以积极联系原作者与出版社进行正规的中文翻译并出版。
 
+## 阅读
+[在线阅览](https://nolongerwait.com/cpp_lambda_story_chinese_edition/)
+
 ## 目录
 
 - [关于此书](Source/Chapter0/README.md)
@@ -109,3 +112,4 @@
 
 ## 致谢
 本书 Chapter 4 C++17 章节翻译感谢 [@Dup4](https://github.com/Dup4) 同学的支持。
+在线阅览能力也感谢 [@Dup4](https://github.com/Dup4) 同学的支持。
