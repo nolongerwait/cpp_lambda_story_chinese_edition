@@ -1,5 +1,6 @@
 {
     "private": true,
+    "packageManager": "pnpm@8.15.1",
     "scripts": {
         "build": "mkdocs build",
         "dev": "mkdocs serve",
@@ -9,5 +10,9 @@
     "dependencies": {
         "remark-cli": "^10.0.1",
         "remark-preset-lint-mkdocs-material": "^0.6.0"
+    },
+    "devDependencies": {
+        "pnpm": "^8.15.1",
+        "taze": "^0.13.3"
     }
 }
